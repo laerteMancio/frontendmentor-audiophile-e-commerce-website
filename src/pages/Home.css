@@ -1,0 +1,74 @@
+.container-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  margin-left: 50px;
+
+  background-image: url("../assets/home/desktop/image-hero.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center left 120px;
+
+}
+
+.container-home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 51%;
+  height: 100%;
+  background-color: var(--preto);  
+}
+
+.conteudo-produtos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 80%;
+  
+
+  text-align: start;
+
+  color: var(--branco);
+
+  z-index: 1;
+
+  
+
+}
+
+.conteudo-produtos h1 {
+  margin: 5% 0 3% 0;
+}
+
+.conteudo-produtos span {
+  color: var(--vinte);
+}
+
+.conteudo-produtos p {
+  padding-right: 115px;
+  margin-bottom: 8%;
+  color: #bebebe;
+}
+
+.novos-produtos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  margin-top: 100px;
+
+  width: 46%;
+  height: 100%;
+
+  
+}

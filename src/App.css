@@ -8,34 +8,7 @@
 }
 
 .header {
-  grid-row: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-
-  height: 100vh;
-
-  background-image: url("./assets/home/desktop/image-hero.jpg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-
-  background-position: right;
-  position: relative;
-
-  background-color: var(--preto);
-}
-
-.header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 47%;
-  height: 100%;
-  background-color: var(--preto); /* Metade com cor */
+  grid-row: 1;  
 }
 
 .layout {

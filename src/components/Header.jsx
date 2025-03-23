@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className='header-conteudo'>
       <div className='menu-navegacao'>
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" /> 
 
         <nav>
           <ul>
@@ -24,17 +24,6 @@ const Header = () => {
 
         <img src={cart} alt="Ícone do carrinho de compras" />
       </div>
-
-
-      <div className='conteudo-produtos'>
-        <span className='overline'>New product</span>
-        <h1>XX99 Mark II Headphones</h1>
-        <p>Experience natural, lifelike audio and exceptional build quality made for the passionate music enthusiast.</p>
-        <button className='default-1'>SEE PRODUCT</button>
-      </div>
-
-      
-
 
     </header>
 

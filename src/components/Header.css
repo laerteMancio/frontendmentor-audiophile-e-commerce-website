@@ -2,19 +2,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: center;
 
-  width: 75%;
-  height: 100%;
+  width: 80%;
+  height: 100px;
 
-  margin: 0 auto;
-
-  z-index: 1;
-
-  position: relative;
+  margin-left: 50px;
 
   color: var(--cinza-claro);
 
+  background-color: transparent;
+
+  border-bottom: 1px solid white;
+
+
+  position: absolute;  
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 2;
+
+  
 }
 
 .menu-navegacao {
@@ -23,10 +31,10 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-  height: 20%;
+  
 
-  border-bottom: 1px solid white;
+  width: 100%;
+  height: 100px;
 }
 
 .menu-navegacao ul {
@@ -35,50 +43,5 @@
   justify-content: center;
   align-items: center;
 
-  gap: 30px;
-}
-
-.novos-proutos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-
-  width: 100%;
-  height: 100%;
-
-  color: black;
-}
-
-.conteudo-produtos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-
-  width: 47%;
-  height: 100%;
-
-  background-color: transparent;
-
-  text-align: start;
-
-  color: var(--branco);
-
-  margin-right: auto;
-}
-
-.conteudo-produtos h1{
-  margin: 5% 0 3% 0 ;
-}
-
-.conteudo-produtos span{
-  color: var(--vinte);
-}
-
-.conteudo-produtos p {
-  padding-right: 115px;
-  margin-bottom: 8%;
-  color: #bebebe;
-
+  gap: 50px;
 }
