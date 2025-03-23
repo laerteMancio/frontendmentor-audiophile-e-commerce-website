@@ -1,0 +1,204 @@
+:root {
+  /*Cores*/
+  --laranja: #d87d4a;
+  --preto-fosco: #101010;
+  --cinza-escuro: #f1f1f1;
+  --cinza-claro: #fafafa;
+  --coral: #fbaf85;
+  --branco: #ffffff;
+  --preto: #000000;
+  --vinte: #4c4c4c;
+
+  /*Tipografia*/
+
+  --font-family-manrope: "Manrope", sans-serif;
+
+  /* Tamanhos de fontes */
+  --font-size-body: 15px;
+  --font-size-h1: 56px;
+  --font-size-h2: 40px;
+  --font-size-h3: 32px;
+  --font-size-h4: 28px;
+  --font-size-h5: 24px;
+  --font-size-h6: 18px;
+  --font-size-overline: 14px;
+  --font-size-subtitle: 13px;
+  --font-weight-body: 500;
+
+  /* Line heights */
+  --line-height-body: 25px;
+  --line-height-h1: 58px;
+  --line-height-h2: 44px;
+  --line-height-h3: 36px;
+  --line-height-h4: 38px;
+  --line-height-h5: 33px;
+  --line-height-h6: 24px;
+  --line-height-overline: 19px;
+  --line-height-subtitle: 25px;
+
+  /* Letter spacing */
+  --letter-spacing-h1: 2px;
+  --letter-spacing-h2: 1.5px;
+  --letter-spacing-h3: 1.15px;
+  --letter-spacing-h4: 2px;
+  --letter-spacing-h5: 1.7px;
+  --letter-spacing-h6: 1.3px;
+  --letter-spacing-overline: 10px;
+  --letter-spacing-subtitle: 1px;
+}
+
+/* H1 */
+h1 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h1);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h1);
+  line-height: var(--line-height-h1);    
+}
+
+/* H2 */
+h2 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h2);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h2);
+  line-height: var(--line-height-h2);
+}
+
+/* H3 */
+h3 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h3);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h3);
+  line-height: var(--line-height-h3);
+}
+
+/* H4 */
+h4 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h4);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h4);
+  line-height: var(--line-height-h4);
+}
+
+/* H5 */
+h5 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h5);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h5);
+  line-height: var(--line-height-h5);
+}
+
+/* H6 */
+h6 {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h6);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-h6);
+  line-height: var(--line-height-h6);
+}
+
+/* Overline */
+.overline {
+  font-family: var(--font-family-manrope);
+  font-weight: regular;
+  font-size: var(--font-size-overline);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-overline);
+  line-height: var(--line-height-overline);    
+}
+
+/* Subtitle */
+.subtitle {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-subtitle);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-subtitle);
+  line-height: var(--line-height-subtitle);
+}
+
+/*Buttons*/
+.default-1{
+  width: 160px;
+  height: 48px;
+  background-color: var(--laranja);
+  color: var(--branco);
+  text-align: center;
+  
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;  
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  font-weight: var(--font-weight-body);
+  overflow: hidden;
+}
+
+
+/* Listas*/
+
+ul, ol {
+  list-style: none; /* Remove marcadores ou números das listas */
+  padding: 0; /* Remove o padding */
+  margin: 0; /* Remove a margem */
+}
+
+/*Links*/
+
+a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: inherit; /* Herda a cor do elemento pai */
+}
+
+
+
+/* Buttons*/
+
+button {
+  all: unset; 
+  padding: 0; 
+  background: none; 
+  border: none; 
+  font-family: inherit; 
+  font-size: inherit; 
+  cursor: pointer; 
+}
+
+/*Elementos*/
+
+input, select, textarea {
+  border: none; /* Remove a borda padrão */
+  background: none; /* Remove o fundo */
+  font: inherit; /* Herda a fonte do elemento pai */
+  outline: none; /* Remove o contorno ao focar (se necessário) */
+}
