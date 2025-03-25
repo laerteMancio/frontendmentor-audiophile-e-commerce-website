@@ -10,6 +10,7 @@ function App() {
     <div className='container-geral'>
       <div className='header'><Header /></div>
       <div className='layout'><Layout /></div>
+      <div className='footer'><Footer /></div>
       
     </div>
   )

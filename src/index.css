@@ -107,6 +107,13 @@ h6 {
   line-height: var(--line-height-h6);
 }
 
+p{
+  font-size: var(--font-size-body);
+  line-height: 25px;
+  font-weight: 500;
+  padding: 0 30px 0 30px;
+}
+
 /* Overline */
 .overline {
   font-family: var(--font-family-manrope);
@@ -146,12 +153,13 @@ h6 {
 
 html,
 body {
-  height: 100%;
-  margin: 0;  
+  height: 100%;  
+  margin: 0; 
+  overflow-x: hidden; 
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100vh; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -162,6 +170,8 @@ body {
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
   overflow: hidden;
+
+  
 
 }
 
