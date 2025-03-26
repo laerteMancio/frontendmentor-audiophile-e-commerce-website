@@ -54,7 +54,7 @@ h1 {
   font-size: var(--font-size-h1);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-h1);
-  line-height: var(--line-height-h1);    
+  line-height: var(--line-height-h1);
 }
 
 /* H2 */
@@ -107,7 +107,7 @@ h6 {
   line-height: var(--line-height-h6);
 }
 
-p{
+p {
   font-size: var(--font-size-body);
   line-height: 25px;
   font-weight: 500;
@@ -121,7 +121,7 @@ p{
   font-size: var(--font-size-overline);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-overline);
-  line-height: var(--line-height-overline);    
+  line-height: var(--line-height-overline);
 }
 
 /* Subtitle */
@@ -135,13 +135,59 @@ p{
 }
 
 /*Buttons*/
-.default-1{
+.default-1 {
   width: 160px;
   height: 48px;
   background-color: var(--laranja);
   color: var(--branco);
   text-align: center;
+}
+
+.default-2 {
+  width: 160px;
+  height: 48px;
+  background-color: var(--branco);
+  color: var(--preto);
+  border: 1px solid var(--preto);
+  text-align: center;
+}
+
+.default-3 {
+  width: 39px;
+  height: 18px;  
+  color: var(--preto);
+  font-weight: bold;
+  border: none;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 1px;
+  opacity: 50%;  
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 15px; /* Espaço para a seta */
+}
+
+.default-3::after {
+  content: "";
+  position: absolute;
+  right: 1px; 
   
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--laranja);
+  border-top: 2px solid var(--laranja);
+  
+  transform: rotate(45deg);
+}
+
+
+.default-3:hover{
+  stroke: #000000; 
+  stroke-width: 20%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 *,
@@ -150,16 +196,15 @@ p{
   box-sizing: border-box;
 }
 
-
 html,
 body {
-  height: 100%;  
-  margin: 0; 
-  overflow-x: hidden; 
+  height: auto;
+  margin: 0;
+  overflow: hidden;
 }
 
 body {
-  min-height: 100vh; 
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,15 +215,12 @@ body {
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
   overflow: hidden;
-
-  
-
 }
-
 
 /* Listas*/
 
-ul, ol {
+ul,
+ol {
   list-style: none; /* Remove marcadores ou números das listas */
   padding: 0; /* Remove o padding */
   margin: 0; /* Remove a margem */
@@ -191,23 +233,23 @@ a {
   color: inherit; /* Herda a cor do elemento pai */
 }
 
-
-
 /* Buttons*/
 
 button {
-  all: unset; 
-  padding: 0; 
-  background: none; 
-  border: none; 
-  font-family: inherit; 
-  font-size: inherit; 
-  cursor: pointer; 
+  all: unset;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
 }
 
 /*Elementos*/
 
-input, select, textarea {
+input,
+select,
+textarea {
   border: none; /* Remove a borda padrão */
   background: none; /* Remove o fundo */
   font: inherit; /* Herda a fonte do elemento pai */

@@ -1,47 +1,42 @@
 .container-geral {
   display: grid;
-  grid-template-rows: 85% 1fr 50px; 
-  grid-template-columns: 100%; 
+  grid-template-rows: 75vh 1fr 50px;
+  grid-template-columns: 100%;
   min-height: 100vh;
   width: 100%;
 
-  position: relative;
-}
+  background-color: var(--cinza-claro);
 
+}
 
 .header {
   display: flex;
   justify-content: center;
   align-items: start;
-  
+
   color: white;
   grid-row: 1 / 2;
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  
 
   background-image: url("./assets/home//mobile/image-header.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top -50px; 
+  background-size: 100%;
+  background-position: center top -30px;
 
-  position: relative;
+  
 }
-
 
 .layout {
   display: flex;
   justify-content: center;
   align-items: start;
-  grid-row: 2 / 3; 
+  grid-row: 2 / 3;
   width: 100%;
   height: 100%;
 
-
-  
-  
+  overflow-y: auto;
 }
-
 
 .footer {
   display: flex;

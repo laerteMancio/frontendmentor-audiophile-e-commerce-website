@@ -1,17 +1,57 @@
-.container-home {
+.container-produtos {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 85%;
+  width: 100vw;
+  height: 100%;
 
-  color: white;
+  margin-top: 16%;
 
-  position: absolute;
-  top: 0;
-
-  text-align: center;
+  gap: 60px;
 }
 
+.produto-categorias {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 327px;
+  height: 165px;
 
+  color: black;
+  text-align: center;
+
+  background-color: var(--cinza-escuro);
+
+  position: relative;
+}
+
+.home-container-titulo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  gap: 10px;
+}
+
+.home-titulo-categoria{
+  font-size: var(--font-size-body);
+  font-weight: bold;
+}
+
+.headphone-categoria {
+  display: block;
+  max-width: 79,92%;
+  height: 104px;
+  object-fit: contain;
+  border: none;
+  opacity: 100%;
+
+  position: absolute;
+  top: -50px;
+}
