@@ -29,7 +29,7 @@
   --line-height-body: 25px;
   --line-height-h1: 58px;
   --line-height-h2: 44px;
-  --line-height-h3: 36px;
+  --line-height-h3: 40px;
   --line-height-h4: 38px;
   --line-height-h5: 33px;
   --line-height-h6: 24px;
@@ -39,7 +39,7 @@
   /* Letter spacing */
   --letter-spacing-h1: 2px;
   --letter-spacing-h2: 1.5px;
-  --letter-spacing-h3: 1.15px;
+  --letter-spacing-h3: 1.29px;
   --letter-spacing-h4: 2px;
   --letter-spacing-h5: 1.7px;
   --letter-spacing-h6: 1.3px;
@@ -188,6 +188,16 @@ p {
   stroke: #000000; 
   stroke-width: 20%;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.default-destaque-1{
+  background-color: var(--preto);
+  color: var(--branco);
+  width: 160px;
+  height: 48px;
+  font-size: var(--font-size-subtitle);
+  line-height: auto;
+  letter-spacing: 1px;
 }
 
 *,
