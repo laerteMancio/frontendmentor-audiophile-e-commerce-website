@@ -136,6 +136,9 @@ p {
 
 /*Buttons*/
 .default-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 160px;
   height: 48px;
   background-color: var(--laranja);
@@ -144,6 +147,9 @@ p {
 }
 
 .default-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 160px;
   height: 48px;
   background-color: var(--branco);
@@ -153,6 +159,9 @@ p {
 }
 
 .default-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 39px;
   height: 18px;  
   color: var(--preto);
@@ -174,7 +183,7 @@ p {
   content: "";
   position: absolute;
   right: 1px; 
-  
+
   width: 10px;
   height: 10px;
   border-right: 2px solid var(--laranja);
@@ -190,6 +199,10 @@ p {
 }
 
 .default-destaque-1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   background-color: var(--preto);
   color: var(--branco);
   width: 160px;
@@ -200,12 +213,17 @@ p {
 }
 
 .default-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   width: 160px;
   height: 48px;
   background-color: transparent;
   color: var(--preto);
   border: 1px solid var(--preto);
   text-align: center;
+  
 }
 
 *,
@@ -218,7 +236,7 @@ html,
 body {
   height: auto;
   margin: 0;
-  overflow: hidden;
+  
 }
 
 body {
@@ -232,7 +250,7 @@ body {
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   font-weight: var(--font-weight-body);
-  overflow: hidden;
+  
 }
 
 /* Listas*/

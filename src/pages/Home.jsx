@@ -1,88 +1,84 @@
-import React from 'react'
-import "./Home.css"
+import React from 'react';
+import "./Home.css";
 
-import headphone from "../assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview-removebg-preview.png"
-import speaker from "../assets/product-zx9-speaker/mobile/image-category-page-preview.png"
-import speakerHome from "../assets/home/mobile/image-speaker-zx9.png"
-import earphone from "../assets/product-yx1-earphones/mobile/image-category-page-preview-removebg-preview.png"
-
+import headphone from "../assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview-removebg-preview.png";
+import speaker from "../assets/product-zx9-speaker/mobile/image-category-page-preview.png";
+import speakerHome from "../assets/home/mobile/image-speaker-zx9.png";
+import earphone from "../assets/product-yx1-earphones/mobile/image-category-page-preview-removebg-preview.png";
 
 const Home = () => {
   return (
-    <div className='container-produtos'>
+    <main className='container-produtos'>
 
       {/* Categorias */}
-
-      <div className='container-categorias'>
-        <div className='produto-categorias'>
-          <img className='imagens-categoria' src={headphone} alt="Imagem categoria Headphone" />
+      <section className='container-categorias'>
+        <article className='produto-categorias'>
+          <img className='imagens-categoria' src={headphone} alt="Categoria Headphone" />
           <div className='home-container-titulo'>
-            <span className='home-titulo-categoria'>HEADPHONES</span>
-            <button className='default-3'>SHOP</button>
+            <h3 className='home-titulo-categoria'>HEADPHONES</h3>
+            <a href="/categoria/headphones" className='default-3'>SHOP</a>
           </div>
-        </div>
+        </article>
 
-        <div className='produto-categorias'>
-          <img className='imagens-categoria' src={speaker} alt="Imagem categoria Speakers" />
+        <article className='produto-categorias'>
+          <img className='imagens-categoria' src={speaker} alt="Categoria Speakers" />
           <div className='home-container-titulo'>
-            <span className='home-titulo-categoria'>SPEAKERS</span>
-            <button className='default-3'>SHOP</button>
+            <h3 className='home-titulo-categoria'>SPEAKERS</h3>
+            <a href="/categoria/speakers" className='default-3'>SHOP</a>
           </div>
-        </div>
+        </article>
 
-        <div className='produto-categorias'>
-          <img className='imagens-categoria' src={earphone} alt="Imagem categoria Earphones" />
+        <article className='produto-categorias'>
+          <img className='imagens-categoria' src={earphone} alt="Categoria Earphones" />
           <div className='home-container-titulo'>
-            <span className='home-titulo-categoria'>EARPHONES</span>
-            <button className='default-3'>SHOP</button>
+            <h3 className='home-titulo-categoria'>EARPHONES</h3>
+            <a href="/categoria/earphones" className='default-3'>SHOP</a>
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
 
       {/* Destaques */}
+      <section className='container-destaques'>
 
-      <div className='container-destaques'>
-
-        <div className='destaques-produtos-1'>
-          <div className='container-efeito'>
-            <img className='imagens-destaques' src={speakerHome} alt="Imagem categoria Headphone" />
+        <article className='destaques-produtos-1'>
+          <figure className='container-efeito'>
+            <img className='imagens-destaques' src={speakerHome} alt="ZX9 Speaker" />
             <div className='circulo-1'></div>
             <div className='circulo-2'></div>
             <div className='circulo-3'></div>
-            <h2>ZX9 SPEAKER</h2>
-          </div>
+            <figcaption>
+              <h2>ZX9 SPEAKER</h2>
+            </figcaption>
+          </figure>
           <div className='container-info'>
             <p>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-            <button className='default-destaque-1'>SEE PRODUCT</button>
+            <a href="/produto/zx9-speaker" className='default-destaque-1'>SEE PRODUCT</a>
           </div>
-        </div>
+        </article>
 
-        <div className='destaques-produtos-2'>
-          <h4>ZX7 SPEAKER</h4>
-          <button className='default-4'>SEE PRODUCT</button>
-        </div>
+        <article className='destaques-produtos-2'>
+          <h3>ZX7 SPEAKER</h3>
+          <a href="/produto/zx7-speaker" className='default-4'>SEE PRODUCT</a>
+        </article>
 
-        <div className='destaques-produtos-3'>
+        <article className='destaques-produtos-3'>
           <div className='destaques-3-cima'></div>
           <div className='destaques-3-baixo'>
-            <h4>YX1 EARPHONES</h4>
-            <button className='default-4'>SEE PRODUCT</button>
+            <h3>YX1 EARPHONES</h3>
+            <a href="/produto/yx1-earphones" className='default-4'>SEE PRODUCT</a>
           </div>
-        </div>
+        </article>
+      </section>
 
-        <div className='home-sobre'>
-          <div className='home-sobre-fundo'></div>
-          <h4>Bringing you the <span className='home-sobre-cor'>best</span> audio gear</h4>
-          <p>Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.</p>
+      {/* Sobre */}
+      <section className='home-sobre'>
+        <div className='home-sobre-fundo'></div>
+        <h2>Bringing you the <strong>best</strong> audio gear</h2>
+        <p>Located at the heart of New York City, Audiophile is the premier store for high end headphones, earphones, speakers, and audio accessories. We have a large showroom and luxury demonstration rooms available for you to browse and experience a wide range of our products. Stop by our store to meet some of the fantastic people who make Audiophile the best place to buy your portable audio equipment.</p>
+      </section>
 
-        </div>
+    </main>
+  );
+};
 
-      </div>
-
-
-    </div>
-
-  )
-}
-
-export default Home
+export default Home;
