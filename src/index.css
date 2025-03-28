@@ -167,7 +167,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 15px; /* Espaço para a seta */
+  padding-right: 15px;
 }
 
 .default-3::after {
@@ -183,7 +183,6 @@ p {
   transform: rotate(45deg);
 }
 
-
 .default-3:hover{
   stroke: #000000; 
   stroke-width: 20%;
@@ -198,6 +197,15 @@ p {
   font-size: var(--font-size-subtitle);
   line-height: auto;
   letter-spacing: 1px;
+}
+
+.default-4 {
+  width: 160px;
+  height: 48px;
+  background-color: transparent;
+  color: var(--preto);
+  border: 1px solid var(--preto);
+  text-align: center;
 }
 
 *,
