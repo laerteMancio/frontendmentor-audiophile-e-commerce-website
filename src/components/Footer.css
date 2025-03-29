@@ -12,6 +12,8 @@
     color: white;
 
     position: relative;
+
+    margin-top: 40%;
   }
 
   .footer-pagina::before {

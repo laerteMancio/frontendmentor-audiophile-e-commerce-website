@@ -1,0 +1,94 @@
+.container-categorias-componente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    width: 100%;
+    height: 100%;
+  
+    gap: 60px;
+  
+    z-index: 1;
+
+    margin-bottom: 30%;
+  }
+  
+  .produto-categorias-componente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 327px;
+    height: 165px;
+  
+    color: black;
+    text-align: center;
+  
+    background-color: var(--cinza-escuro);
+  
+    position: relative;
+  
+    border-radius: 10px;
+  }
+  
+  .home-container-titulo-componente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    width: 100%;
+    height: 100%;
+  
+    gap: 10px;
+  }
+  
+  .home-titulo-categoria-componente {
+    font-size: var(--font-size-body);
+    font-weight: bold;
+  }
+  
+  .imagens-categoria-componente {
+    display: block;
+    max-width: 79.92%;
+    height: 104px;
+    object-fit: contain;
+    border: none;
+    opacity: 100%;
+  
+    position: absolute;
+    top: -50px;
+  }
+
+
+  .home-sobre-componente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 327px;
+    height: 698px;
+    border-radius: 10px;
+  
+    text-align: center;
+  }
+  
+  .home-sobre-fundo-componente{
+    width: 327px;
+    height: 300px;
+  
+    background-image: url("../assets/shared/mobile/image-best-gear.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .home-sobre-componente h2{
+    font-size: var(--font-size-h2-28);
+  }
+  
+  
+  .home-sobre-cor-componente{
+    color: var(--laranja);
+  }

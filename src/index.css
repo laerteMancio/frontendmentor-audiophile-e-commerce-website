@@ -75,7 +75,7 @@ h3 {
   font-size: var(--font-size-h3);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-h3);
-  line-height: var(--line-height-h3);
+  
 }
 
 /* H4 */
@@ -111,8 +111,7 @@ h6 {
 p {
   font-size: var(--font-size-body);
   line-height: 25px;
-  font-weight: 500;
-  padding: 0 30px 0 30px;
+  font-weight: 500;  
 }
 
 /* Overline */
@@ -174,10 +173,8 @@ p {
   opacity: 50%;  
 
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-right: 15px;
+ 
+  padding-right: 30px;
 }
 
 .default-3::after {

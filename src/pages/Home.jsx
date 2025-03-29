@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 import headphone from "../assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview-removebg-preview.png";
@@ -6,7 +7,13 @@ import speaker from "../assets/product-zx9-speaker/mobile/image-category-page-pr
 import speakerHome from "../assets/home/mobile/image-speaker-zx9.png";
 import earphone from "../assets/product-yx1-earphones/mobile/image-category-page-preview-removebg-preview.png";
 
+// Hooks
+import { useDados } from "../hooks/useDados";
+
 const Home = () => {
+
+  const { setLocal, local } = useDados();
+
   return (
     <main className='container-produtos'>
 
@@ -16,7 +23,7 @@ const Home = () => {
           <img className='imagens-categoria' src={headphone} alt="Categoria Headphone" />
           <div className='home-container-titulo'>
             <h3 className='home-titulo-categoria'>HEADPHONES</h3>
-            <a href="/categoria/headphones" className='default-3'>SHOP</a>
+            <Link to="/headphones" onClick={() => setLocal("headphones")} className="default-3">SHOP</Link>
           </div>
         </article>
 

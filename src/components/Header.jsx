@@ -1,4 +1,4 @@
-import React, { use, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 
 // Styles
 import "./Header.css";
@@ -27,6 +27,7 @@ const reducer = (_, action) => componentsMap[action] || <ProdutoHeader />;
 
 const Header = () => {
   const { local } = useDados();
+  
   const [componenteAtual, dispatch] = useReducer(reducer, componentsMap[local] || <ProdutoHeader />);
   const [backGroundHeader, setBackGroundHeader] = useState("background-header")
 
@@ -36,7 +37,7 @@ const Header = () => {
   }, [local]);
   
   return (
-    <header className={`container-header ${local !== "home" ? backGroundHeader : ''}`}>
+    <header className={`container-header ${local !== "home" ? backGroundHeader : ""}`}>
       <div className="menu-navegacao">
         <div className="hamburguer">
           <div></div>
