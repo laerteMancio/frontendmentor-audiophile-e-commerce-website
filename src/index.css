@@ -140,8 +140,8 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 160px;
-  height: 48px;
+  width: 160px;  
+  min-height: 48px;
   background-color: var(--laranja);
   color: var(--branco);
   text-align: center;

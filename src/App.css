@@ -1,6 +1,6 @@
 .container-geral {
   display: grid;
-  grid-template-rows: 75vh 1fr 654px;
+  grid-template-rows: auto 1fr 654px;
   grid-template-columns: 100%;
   min-height: 100vh;
   width: 100%;
