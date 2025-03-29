@@ -7,11 +7,10 @@
 
     width: 100%;
     margin-top: 5%;
+
     padding-bottom: 6%;
 
     border-bottom: 1px solid var(--vinte);
-
-    
   }
 
   .menu-pagina {
@@ -30,7 +29,6 @@
     background-color: white;
     color: black;
   }
-  
 
   .hamburguer div {
     width: 25px;
@@ -60,20 +58,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;  
+    width: 100%;
 
     color: white;
 
     text-align: center;
-
   }
-  .produto-header-1 p{
+  .produto-header-1 p {
     margin-top: 0;
-    padding-top: 0 ;
+    padding-top: 0;
   }
 
-  .produto-header-1{
+  .produto-header-1 {
     margin-bottom: 35%;
-
   }
 }

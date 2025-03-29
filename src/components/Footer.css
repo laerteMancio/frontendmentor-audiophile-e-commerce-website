@@ -11,6 +11,16 @@
     background-color: var(--preto);
     color: white;
 
+    position: relative;
+  }
+
+  .footer-pagina::before {
+    content: "";
+    position: absolute;
+    top: 0;
+
+    width: 30%;
+    border-top: 4px solid var(--laranja);
   }
 
   .footer-container{

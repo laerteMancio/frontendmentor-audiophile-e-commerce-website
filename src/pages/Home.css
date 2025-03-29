@@ -262,6 +262,11 @@
   background-position: center;
 }
 
+.home-sobre h2{
+  font-size: var(--font-size-h2-28);
+}
+
+
 .home-sobre-cor{
   color: var(--laranja);
 }
