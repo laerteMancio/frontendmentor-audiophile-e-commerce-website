@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Headphones.css"
+import "./PaginaProdutos.css"
 
 import Produtos from "../components/Produtos"
 

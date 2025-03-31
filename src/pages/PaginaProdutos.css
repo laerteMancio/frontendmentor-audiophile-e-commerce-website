@@ -3,12 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 327px;  
+  width: 327px;
   margin-top: 10%;
   margin-bottom: 16%;
 
   gap: 50px;
-  
 }
 
 .produto-pagina {
@@ -29,6 +28,10 @@
   color: var(--laranja);
 }
 
+.produto-pagina p {
+  padding: 0 5px 0 5px;
+}
+
 .imagem-produto-pagina {
   display: block;
   max-width: 327px;
@@ -36,10 +39,7 @@
   object-fit: contain;
   border: none;
   opacity: 100%;
-
-
 }
-
 
 .container-sobre-pagina {
   display: flex;
@@ -47,5 +47,4 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  
 }

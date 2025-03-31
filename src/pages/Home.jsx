@@ -31,7 +31,7 @@ const Home = () => {
           <img className='imagens-categoria' src={speaker} alt="Categoria Speakers" />
           <div className='home-container-titulo'>
             <h3 className='home-titulo-categoria'>SPEAKERS</h3>
-            <a href="/categoria/speakers" className='default-3'>SHOP</a>
+            <Link to="/speakers" onClick={() => setLocal("speakers")} className="default-3">SHOP</Link>
           </div>
         </article>
 
@@ -39,7 +39,7 @@ const Home = () => {
           <img className='imagens-categoria' src={earphone} alt="Categoria Earphones" />
           <div className='home-container-titulo'>
             <h3 className='home-titulo-categoria'>EARPHONES</h3>
-            <a href="/categoria/earphones" className='default-3'>SHOP</a>
+            <Link to="/earphones" onClick={() => setLocal("earphones")} className="default-3">SHOP</Link>
           </div>
         </article>
       </section>
