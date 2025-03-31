@@ -1,20 +1,37 @@
 import React from 'react'
 import "./Headphones.css"
 
-import headphone1 from "../assets/product-xx99-mark-two-headphones/mobile/image-product.jpg";
+import Produtos from "../components/Produtos"
 
 //Components
 import Categorias from "../components/Categorias"
 
 
 const Headphones = () => {
-    return (
-        <main className='container-produtos-componente'>
 
-            {/* Produto */}
-            <section className='container-produtos-componente'>
-                <article className='produto-componente'>
-                    <img className='imagem-produto-componente' src={headphone1} alt="Imagem produto" />
+    const headphoneNew = "https://www.dropbox.com/scl/fi/tmgc717ox5k7so1wkk905/image-product.jpg?rlkey=iwal95iaq7tnk6v18gsz7vomp&st=exbndh9i&raw=1"
+
+    const listaProdutos = [
+        {   
+            imagem: "https://www.dropbox.com/scl/fi/rx6b2xzem1holxoayth23/image-product.jpg?rlkey=wg04ow28gds4n8wswrm0d830c&st=g021ssj3&raw=1",
+            descricao: "XX99 Mark I Headphones",
+            sobre: "As the gold standard for headphones, the classic XX99 Mark I offers detailed and accurate audio reproduction for audiophiles, mixing engineers, and music aficionados alike in studios and on the go."
+        },
+        {            
+            imagem: "https://www.dropbox.com/scl/fi/8ie977fmi31c106jfn9s2/image-product.jpg?rlkey=u73d98jishac2hpmoqdatt3v6&st=es3o14b2&raw=1",
+            descricao: "XX59 Headphones",
+            sobre: "Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move."
+        }
+    ]
+
+
+    return (
+        <main className='container-produtos-pagina'>
+
+            {/* Produto Novidade */}
+            <section>
+                <article className='produto-pagina'>
+                    <img className='imagem-produto-pagina' src={headphoneNew} alt="Imagem produto" />
                     <h1 className='overline'>NEW PRODUCT</h1>
                     <h3>XX99 MARK II HEADPHONES</h3>
                     <p>The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.</p>
@@ -22,8 +39,20 @@ const Headphones = () => {
                 </article>
             </section>
 
+            <section>
+                {listaProdutos.map((produto, index) => (
+                    <Produtos
+                        key={index}
+                        imagem={produto.imagem}
+                        descricao={produto.descricao}
+                        sobre={produto.sobre}
+                    />
+                ))}
+            </section>
+
+
             {/* Categorias */}
-            <section className='container-sobre-componente'>
+            <section className='container-sobre-pagina'>
                 <article >
                     <Categorias />
                 </article>

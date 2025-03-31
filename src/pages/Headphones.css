@@ -1,15 +1,17 @@
-.container-produtos-componente {
+.container-produtos-pagina {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;  
+  width: 327px;  
   margin-top: 10%;
   margin-bottom: 16%;
+
+  gap: 50px;
   
 }
 
-.produto-componente {
+.produto-pagina {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,11 +25,11 @@
   margin-bottom: 16%;
 }
 
-.produto-componente h1 {
+.produto-pagina h1 {
   color: var(--laranja);
 }
 
-.imagem-produto-componente {
+.imagem-produto-pagina {
   display: block;
   max-width: 327px;
   min-height: 352px;
@@ -38,7 +40,8 @@
 
 }
 
-.container-sobre-componente {
+
+.container-sobre-pagina {
   display: flex;
   flex-direction: column;
   justify-content: center;

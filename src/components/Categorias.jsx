@@ -1,11 +1,12 @@
 import React from 'react'
 import "./Categorias.css"
 
-import headphone from "../assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview-removebg-preview.png";
-import speaker from "../assets/product-zx9-speaker/mobile/image-category-page-preview.png";
-import earphone from "../assets/product-yx1-earphones/mobile/image-category-page-preview-removebg-preview.png";
-
 const Categorias = () => {
+
+    const headphone = "https://www.dropbox.com/scl/fi/xs2kqrinwju2e6qf77oja/image-category-page-preview-removebg-preview.png?rlkey=bluefvgunqhb0afmx73btgzp2&raw=1";
+    const speaker = "https://www.dropbox.com/scl/fi/c4pwtuynh34rtq0loc1yb/image-category-page-preview.png?rlkey=iqe6bovi686120efeoinn5rv8&raw=1";
+    const earphone = "https://www.dropbox.com/scl/fi/u6tbe8w91fq1qzz2m52am/image-category-page-preview-removebg-preview.png?rlkey=6c91d4fz0kq6febndeweh2av0&raw=1";
+
     return (
         <>
             {/* Categorias */}

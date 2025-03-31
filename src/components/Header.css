@@ -8,6 +8,10 @@
     height: 100%;
   }
 
+  .container-header p{
+    padding: 0 30px 10px 30px;  
+  }
+
   .background-header {
     display: flex;
     flex-direction: column;
