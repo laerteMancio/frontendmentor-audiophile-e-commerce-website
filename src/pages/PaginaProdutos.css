@@ -28,9 +28,15 @@
   color: var(--laranja);
 }
 
+.produto-pagina h3 {
+  line-height: 40px;
+}
+
 .produto-pagina p {
   padding: 0 5px 0 5px;
 }
+
+
 
 .imagem-produto-pagina {
   display: block;
@@ -40,6 +46,7 @@
   border: none;
   opacity: 100%;
 }
+
 
 .container-sobre-pagina {
   display: flex;

@@ -119,6 +119,10 @@
   gap: 10px;
 }
 
+.container-info p{
+  padding: 0 10px 0 10px;
+}
+
 .imagens-destaques {
   display: block;
   max-width: 172.25%;

@@ -27,7 +27,7 @@ const Speakers = () => {
                 </article>
             </section>
 
-            <section>
+            <section className='lista-produtos'>
                 {listaProdutos.map((produto, index) => (
                     <Produtos
                         key={index}
