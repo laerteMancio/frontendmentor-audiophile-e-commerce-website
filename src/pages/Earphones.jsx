@@ -1,36 +1,36 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import "./PaginaProdutos.css"
 
 //Components
-import Produtos from "../components/Produtos"
-import Categorias from "../components/Categorias"
+import Produtos from "../components/produtos/Produtos"
+import Categorias from "../components/produtos/Categorias"
+
+import { EarPhoneNew, listaEarPhones } from "../data/dataProdutos";
 
 
 const Speakers = () => {
 
-    const SpeakerNew = "https://www.dropbox.com/scl/fi/4tfcerwxb60mf4d8l7zwc/image-product.jpg?rlkey=toi5wc8hdww7yespono39rc5g&raw=1"
-
-    const listaProdutos = []
-
-
     return (
         <main className='container-produtos-pagina'>
 
-            {/* Produto Novidade */}
-            <section>
-                <article className='produto-pagina'>
-                    <img className='imagem-produto-pagina' src={SpeakerNew} alt="Imagem produto" />
-                    <h1 className='overline'>NEW PRODUCT</h1>
-                    <h3>YX1 WIRELESS EARPHONES</h3>
-                    <p>Tailor your listening experience with bespoke dynamic drivers from the new YX1 Wireless Earphones. Enjoy incredible high-fidelity sound even in noisy environments with its active noise cancellation feature.</p>
-                    <button className='default-1'>SEE PRODUCT</button>
-                </article>
+            <section className="container-titulo-categorias">
+                <h4>EARPHONES</h4>
             </section>
+            {/* Produto Novidade */}
+            <article className='produto-pagina'>
+                <img className='imagem-produto-pagina' src={EarPhoneNew} alt="YX1 WIRELESS EARPHONES" />
+                <h1 className='overline'>NEW PRODUCT</h1>
+                <h3>YX1 WIRELESS EARPHONES</h3>
+                <p>Tailor your listening experience with bespoke dynamic drivers from the new YX1 Wireless Earphones. Enjoy incredible high-fidelity sound even in noisy environments with its active noise cancellation feature.</p>
+                <Link to="/earphones" className="default-3">SEE PRODUCT</Link>                
+            </article>
+
 
             <section className='lista-produtos'>
-                {listaProdutos.map((produto, index) => (
+                {listaEarPhones.map((produto, index) => (
                     <Produtos
-                        key={index}
+                        key={produto.id || index}
                         imagem={produto.imagem}
                         descricao={produto.descricao}
                         sobre={produto.sobre}

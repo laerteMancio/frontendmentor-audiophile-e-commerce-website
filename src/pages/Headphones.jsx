@@ -1,67 +1,57 @@
-import React from 'react'
-import "./PaginaProdutos.css"
-
-import Produtos from "../components/Produtos"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./PaginaProdutos.css";
 
 //Components
-import Categorias from "../components/Categorias"
+import Produtos from "../components/produtos/Produtos"
+import Categorias from "../components/produtos/Categorias"
 
+import { headphoneNew, listaHeadPhones } from "../data/dataProdutos";
 
 const Headphones = () => {
+  return (
+    <main className="container-produtos-pagina">
+      <section className="container-titulo-categorias">
+        <h4>HEADPHONES</h4>
+      </section>
 
-    const headphoneNew = "https://www.dropbox.com/scl/fi/tmgc717ox5k7so1wkk905/image-product.jpg?rlkey=iwal95iaq7tnk6v18gsz7vomp&st=exbndh9i&raw=1"
+      {/* Produto Novidade */}
+      <article className="produto-pagina">
+        <img
+          className="imagem-produto-pagina"
+          src={headphoneNew}
+          alt="XX99 Mark II Headphones"
+        />
+        <h1 className="overline">NEW PRODUCT</h1>
+        <h3>XX99 MARK II HEADPHONES</h3>
+        <p>
+          The new XX99 Mark II headphones is the pinnacle of pristine audio. It
+          redefines your premium headphone experience by reproducing the
+          balanced depth and precision of studio-quality sound.
+        </p>
+        <Link to="/xx99MarkIIHeadphones" className="default-1">
+          SEE PRODUCT
+        </Link>
+      </article>
 
-    const listaProdutos = [
-        {   
-            imagem: "https://www.dropbox.com/scl/fi/rx6b2xzem1holxoayth23/image-product.jpg?rlkey=wg04ow28gds4n8wswrm0d830c&st=g021ssj3&raw=1",
-            descricao: "XX99 Mark I Headphones",
-            sobre: "As the gold standard for headphones, the classic XX99 Mark I offers detailed and accurate audio reproduction for audiophiles, mixing engineers, and music aficionados alike in studios and on the go."
-        },
-        {            
-            imagem: "https://www.dropbox.com/scl/fi/8ie977fmi31c106jfn9s2/image-product.jpg?rlkey=u73d98jishac2hpmoqdatt3v6&st=es3o14b2&raw=1",
-            descricao: "XX59 Headphones",
-            sobre: "Enjoy your audio almost anywhere and customize it to your specific tastes with the XX59 headphones. The stylish yet durable versatile wireless headset is a brilliant companion at home or on the move."
-        }
-    ]
+      {/* Lista de Produtos */}
+      <section>
+        {listaHeadPhones.map((produto) => (
+          <Produtos
+            key={produto.id}
+            imagem={produto.imagem}
+            descricao={produto.descricao}
+            sobre={produto.sobre}
+          />
+        ))}
+      </section>
 
+      {/* Categorias */}
+      <section className="container-sobre-pagina">
+        <Categorias />
+      </section>
+    </main>
+  );
+};
 
-    return (
-        <main className='container-produtos-pagina'>
-
-            {/* Produto Novidade */}
-            <section>
-                <article className='produto-pagina'>
-                    <img className='imagem-produto-pagina' src={headphoneNew} alt="Imagem produto" />
-                    <h1 className='overline'>NEW PRODUCT</h1>
-                    <h3>XX99 MARK II HEADPHONES</h3>
-                    <p>The new XX99 Mark II headphones is the pinnacle of pristine audio. It redefines your premium headphone experience by reproducing the balanced depth and precision of studio-quality sound.</p>
-                    <button className='default-1'>SEE PRODUCT</button>
-                </article>
-            </section>
-
-            <section>
-                {listaProdutos.map((produto, index) => (
-                    <Produtos
-                        key={index}
-                        imagem={produto.imagem}
-                        descricao={produto.descricao}
-                        sobre={produto.sobre}
-                    />
-                ))}
-            </section>
-
-
-            {/* Categorias */}
-            <section className='container-sobre-pagina'>
-                <article >
-                    <Categorias />
-                </article>
-            </section>
-
-
-        </main>
-
-    )
-}
-
-export default Headphones
+export default Headphones;

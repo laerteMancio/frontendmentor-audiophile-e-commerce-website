@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 
 // Styles
 import "./Header.css";
@@ -7,37 +8,14 @@ import "./Header.css";
 import cart from "../assets/shared/desktop/icon-cart.svg";
 import logo from "../assets/shared/desktop/logo.svg";
 
-// Hooks
-import { useDados } from "../hooks/useDados";
-
 // Components
-import ProdutoHeader from "./ProdutoHeader";
-import TituloHeadPhones from "./TituloHeadPhones";
-import TituloEarphones from "./TituloEarphones";
-import TituloSpeakers from "./TituloSpeakers";
-
-const componentsMap = {
-  home: <ProdutoHeader />,
-  headphones: <TituloHeadPhones />,
-  earphones: <TituloEarphones />,
-  speakers: <TituloSpeakers />,
-};
-
-const reducer = (_, action) => componentsMap[action] || <ProdutoHeader />;
+import ProdutoHeader from "./produtos/ProdutoHeader";
 
 const Header = () => {
-  const { local } = useDados();
-  
-  const [componenteAtual, dispatch] = useReducer(reducer, componentsMap[local] || <ProdutoHeader />);
-  const [backGroundHeader, setBackGroundHeader] = useState("background-header")
+  const local = useLocation()
 
-  // Atualiza o componente quando `local` muda
-  React.useEffect(() => {
-    dispatch(local);
-  }, [local]);
-  
   return (
-    <header className={`container-header ${local !== "home" ? backGroundHeader : ""}`}>
+    <header className={`container-header ${local.pathname === "/" ? "" : "background-header"}`}>
       <div className="menu-navegacao">
         <div className="hamburguer">
           <div></div>
@@ -66,7 +44,8 @@ const Header = () => {
         <img src={cart} alt="Ícone do carrinho de compras" />
       </div>
 
-      <div className="container-produto-header">{componenteAtual}</div>
+      <div className="container-produto-header">{local.pathname === "/" ? <ProdutoHeader /> : ""}</div>
+
     </header>
   );
 };

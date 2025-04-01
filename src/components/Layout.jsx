@@ -7,6 +7,9 @@ import Headphones from "../pages/Headphones";
 import Speakers from "../pages/Speakers"
 import Earphones from "../pages/Earphones"
 
+// components detalhes produtos
+import Xx99MarkIIHeadphones from "../pages/detalhes-produtos/Xx99MarkIIHeadphones"
+
 const Layout = () => {
   return (
     <Routes>
@@ -14,6 +17,7 @@ const Layout = () => {
       <Route path="/headphones" element={<Headphones />} />
       <Route path="/speakers" element={<Speakers />} />
       <Route path="/earphones" element={<Earphones />} />
+      <Route path="/xx99MarkIIHeadphones" element={<Xx99MarkIIHeadphones />} />
     </Routes>
   );
 }
