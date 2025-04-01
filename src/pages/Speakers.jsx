@@ -28,9 +28,9 @@ const Speakers = () => {
 
 
             <section>
-                {listaSpeakers.map((produto) => (
+                {listaSpeakers.map((produto, index) => (
                     <Produtos
-                        key={produto.id}
+                        key={produto.id || index}
                         imagem={produto.imagem}
                         descricao={produto.descricao}
                         sobre={produto.sobre}

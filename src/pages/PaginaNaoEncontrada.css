@@ -1,0 +1,22 @@
+.pagina-erro {
+    text-align: center;
+    padding: 50px;
+}
+
+.pagina-erro h1 {
+    font-size: 80px;
+    color: red;
+}
+
+.pagina-erro h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.botao-voltar {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}

@@ -36,9 +36,9 @@ const Headphones = () => {
 
       {/* Lista de Produtos */}
       <section>
-        {listaHeadPhones.map((produto) => (
+        {listaHeadPhones.map((produto, index) => (
           <Produtos
-            key={produto.id}
+            key={produto.id || index}
             imagem={produto.imagem}
             descricao={produto.descricao}
             sobre={produto.sobre}
