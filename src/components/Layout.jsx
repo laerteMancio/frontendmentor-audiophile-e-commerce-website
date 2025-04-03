@@ -10,6 +10,8 @@ import PaginaNaoEncontrada from '../pages/PaginaNaoEncontrada';
 
 // components detalhes produtos
 import Xx99MarkIIHeadphones from "../pages/detalhes-produtos/Xx99MarkIIHeadphones"
+import Xx99MarkHeadphones from "../pages/detalhes-produtos/Xx99MarkHeadphones"
+import Xx59Headphones from "../pages/detalhes-produtos/Xx59Headphones"
 
 const Layout = () => {
   return (
@@ -19,6 +21,8 @@ const Layout = () => {
       <Route path="/speakers" element={<Speakers />} />
       <Route path="/earphones" element={<Earphones />} />
       <Route path="/xx99MarkIIHeadphones" element={<Xx99MarkIIHeadphones />} />
+      <Route path="/Xx99MarkHeadphones" element={<Xx99MarkHeadphones />} />
+      <Route path="/Xx59Headphones" element={<Xx59Headphones />} />
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
     </Routes>

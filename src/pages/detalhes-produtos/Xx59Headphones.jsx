@@ -11,17 +11,14 @@ import { listaDetalhesHeadPhones } from "../../data/dataProdutos";
 // DataProvider
 import { useDados } from "../../hooks/useDados"
 
-const Xx99MarkIIHeadphones = () => {
-    const produto = listaDetalhesHeadPhones[0];
+const Xx59Headphones = () => {
+    const produto = listaDetalhesHeadPhones[2];
     const [qtdProduto, setQtdProduto] = useState(0)
-    const { setCart } = useDados()
+    const {setCart } = useDados()
 
     const adicionar = () => {
         setQtdProduto(prev => prev + 1);
     }
-
-
-
 
     const subtrair = () => {
         if (qtdProduto > 0) {
@@ -95,4 +92,4 @@ const Xx99MarkIIHeadphones = () => {
     );
 }
 
-export default Xx99MarkIIHeadphones;
+export default Xx59Headphones;

@@ -42,6 +42,7 @@ const Headphones = () => {
             imagem={produto.imagem}
             descricao={produto.descricao}
             sobre={produto.sobre}
+            link={produto.link}
           />
         ))}
       </section>
