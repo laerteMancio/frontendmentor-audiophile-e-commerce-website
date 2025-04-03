@@ -6,6 +6,7 @@
     align-items: center;
 
     height: 100%;
+
   }
 
   .container-header p {
@@ -32,6 +33,7 @@
 
     min-height: 88px;
     width: 100vw;
+    border-bottom: 1px solid var(--vinte);
   }
 
   .menu-pagina {
