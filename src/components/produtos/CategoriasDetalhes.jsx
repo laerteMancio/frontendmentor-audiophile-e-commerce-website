@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import "./CategoriasDetalhes.css"
-import Categorias from "./Categorias"
+
 
 const CategoriasDetalhes = ({ imgGaleria1, imgGaleria2, imgGaleria3 }) => {
 
@@ -25,19 +26,19 @@ const CategoriasDetalhes = ({ imgGaleria1, imgGaleria2, imgGaleria3 }) => {
                     <span>
                         <img className='imagens-categoria-detalhes-3' src={imgCategorias1} alt="imgCategorias1" />
                         <h4>XX99 MARK I</h4>
-                        <button className='default-1'>SEE PRODUCT</button>
+                        <Link to="/Xx99MarkHeadphones" className="default-1">SEE PRODUCT</Link>
                     </span>
 
                     <span>
                         <img className='imagens-categoria-detalhes-3' src={imgCategorias2} alt="imgCategorias1" />
                         <h4>XX59</h4>
-                        <button className='default-1'>SEE PRODUCT</button>
+                        <Link to="/Xx59Headphones" className="default-1">SEE PRODUCT</Link>
                     </span>
 
                     <span>
                         <img className='imagens-categoria-detalhes-3' src={imgCategorias3} alt="imgCategorias1" />
                         <h4>ZX9 SPEAKER</h4>
-                        <button className='default-1'>SEE PRODUCT</button>
+                        <Link to="/Zx9Speaker" className="default-1">SEE PRODUCT</Link>
                     </span>
 
 

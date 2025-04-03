@@ -3,26 +3,43 @@ import { Routes, Route } from "react-router-dom";
 
 //components
 import Home from "../pages/Home"
-import Headphones from "../pages/Headphones";
-import Speakers from "../pages/Speakers"
-import Earphones from "../pages/Earphones"
+import Headphones from "../pages/paginas-categorias/Headphones";
+import Speakers from "../pages/paginas-categorias/Speakers"
+import Earphones from "../pages/paginas-categorias/Earphones"
 import PaginaNaoEncontrada from '../pages/PaginaNaoEncontrada';
 
 // components detalhes produtos
-import Xx99MarkIIHeadphones from "../pages/detalhes-produtos/Xx99MarkIIHeadphones"
-import Xx99MarkHeadphones from "../pages/detalhes-produtos/Xx99MarkHeadphones"
-import Xx59Headphones from "../pages/detalhes-produtos/Xx59Headphones"
+
+//Headphones
+import Xx99MarkIIHeadphones from "../pages/detalhes-produtos/headphones/Xx99MarkIIHeadphones"
+import Xx99MarkHeadphones from "../pages/detalhes-produtos/headphones/Xx99MarkHeadphones"
+import Xx59Headphones from "../pages/detalhes-produtos/headphones/Xx59Headphones"
+
+//Speakers
+import Zx7Speaker from "../pages/detalhes-produtos/speakers/Zx7Speaker"
+import Zx9Speaker from "../pages/detalhes-produtos/speakers/Zx9Speaker"
+
+//Earphone
+import Yx1WirelessEarPhones from "../pages/detalhes-produtos/earphones/Yx1WirelessEarPhones"
 
 const Layout = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      {/* rotas categorias*/}
       <Route path="/headphones" element={<Headphones />} />
       <Route path="/speakers" element={<Speakers />} />
       <Route path="/earphones" element={<Earphones />} />
+      {/* rotas headphones*/}
       <Route path="/xx99MarkIIHeadphones" element={<Xx99MarkIIHeadphones />} />
       <Route path="/Xx99MarkHeadphones" element={<Xx99MarkHeadphones />} />
       <Route path="/Xx59Headphones" element={<Xx59Headphones />} />
+      {/* rotas speakers*/}
+      <Route path="/Zx7Speaker" element={<Zx7Speaker />} />
+      <Route path="/Zx9Speaker" element={<Zx9Speaker />} />
+      {/* rotas earphones*/}
+      <Route path="/Yx1WirelessEarPhones" element={<Yx1WirelessEarPhones />} />
+
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
     </Routes>

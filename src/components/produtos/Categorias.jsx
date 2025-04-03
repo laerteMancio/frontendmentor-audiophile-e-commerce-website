@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import "./Categorias.css"
 
 const Categorias = () => {
@@ -15,7 +16,7 @@ const Categorias = () => {
                     <img className='imagens-categoria-componente' src={headphone} alt="Categoria Headphone" />
                     <div className='container-titulo-componente'>
                         <h3 className='titulo-categoria-componente'>HEADPHONES</h3>
-                        <a href="/categoria/headphones" className='default-3'>SHOP</a>
+                        <Link to="/headphones" className="default-3">SHOP</Link>
                     </div>
                 </article>
 
@@ -23,7 +24,7 @@ const Categorias = () => {
                     <img className='imagens-categoria-componente' src={speaker} alt="Categoria Speakers" />
                     <div className='container-titulo-componente'>
                         <h3 className='titulo-categoria-componente'>SPEAKERS</h3>
-                        <a href="/categoria/speakers" className='default-3'>SHOP</a>
+                        <Link to="/speakers" className="default-3">SHOP</Link>
                     </div>
                 </article>
 
@@ -31,7 +32,7 @@ const Categorias = () => {
                     <img className='imagens-categoria-componente' src={earphone} alt="Categoria Earphones" />
                     <div className='container-titulo-componente'>
                         <h3 className='titulo-categoria-componente'>EARPHONES</h3>
-                        <a href="/categoria/earphones" className='default-3'>SHOP</a>
+                        <Link to="/earphones" className="default-3">SHOP</Link>
                     </div>
                 </article>
             </section>

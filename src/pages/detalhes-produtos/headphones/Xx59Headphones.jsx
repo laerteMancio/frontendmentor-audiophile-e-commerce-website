@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-import "./DetalhesProdutos.css";
+import "../../detalhes-produtos/DetalhesProdutos.css";
 
 // Components
-import Categorias from "../../components/produtos/Categorias";
-import CategoriasDetalhes from '../../components/produtos/CategoriasDetalhes';
+import Categorias from "../../../components/produtos/Categorias";
+import CategoriasDetalhes from '../../../components/produtos/CategoriasDetalhes';
 
 // Data
-import { listaDetalhesHeadPhones } from "../../data/dataProdutos";
+import { listaDetalhesHeadPhones } from "../../../data/dataProdutos";
 
 // DataProvider
-import { useDados } from "../../hooks/useDados"
+import { useDados } from "../../../hooks/useDados"
 
-const Xx99MarkHeadphones = () => {
-    const produto = listaDetalhesHeadPhones[1];
+const Xx59Headphones = () => {
+    const produto = listaDetalhesHeadPhones[2];
     const [qtdProduto, setQtdProduto] = useState(0)
     const {setCart } = useDados()
 
     const adicionar = () => {
         setQtdProduto(prev => prev + 1);
     }
-
-
-
 
     const subtrair = () => {
         if (qtdProduto > 0) {
@@ -81,7 +78,7 @@ const Xx99MarkHeadphones = () => {
 
             <section className='container-categorias-2-detalhes'>
                 <article>
-                <CategoriasDetalhes imgGaleria1={produto.img1} imgGaleria2={produto.img2} imgGaleria3={produto.img3} />
+                    <CategoriasDetalhes imgGaleria1={produto.img1} imgGaleria2={produto.img2} imgGaleria3={produto.img3} />
                 </article>
             </section>
 
@@ -95,4 +92,4 @@ const Xx99MarkHeadphones = () => {
     );
 }
 
-export default Xx99MarkHeadphones;
+export default Xx59Headphones;

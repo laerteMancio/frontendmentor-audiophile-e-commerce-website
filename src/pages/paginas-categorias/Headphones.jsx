@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "./PaginaProdutos.css";
 
 //Components
-import Produtos from "../components/produtos/Produtos"
-import Categorias from "../components/produtos/Categorias"
+import Produtos from "../../components/produtos/Produtos"
+import Categorias from "../../components/produtos/Categorias"
 
-import { headphoneNew, listaHeadPhones } from "../data/dataProdutos";
+import { headphoneNew, listaHeadPhones } from "../../data/dataProdutos";
 
 const Headphones = () => {
   return (
