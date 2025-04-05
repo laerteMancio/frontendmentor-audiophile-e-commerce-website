@@ -11,20 +11,26 @@ import logo from "../assets/shared/desktop/logo.svg";
 // Components
 import ProdutoHeader from "./produtos/ProdutoHeader";
 
+//context
+import { useDados } from "../hooks/useDados";
+
+
 const Header = () => {
   const local = useLocation()
+  const { openCart } = useDados()
+  
 
   return (
-    <header className={`container-header ${local.pathname === "/" ? "" : "background-header"}`}>
+    <header className={`container-header ${local.pathname === "/" ? "" : "background-header"}`}>      
       <div className="menu-navegacao">
         <div className="hamburguer">
           <div></div>
           <div></div>
           <div></div>
         </div>
-        <img src={logo} alt="Logo" />
+        <img  src={logo} alt="Logo" />
 
-        <nav className="menu-pagina">
+        <nav  className="menu-pagina">
           <ul>
             <li>
               <a href="/home">HOME</a>
@@ -41,10 +47,10 @@ const Header = () => {
           </ul>
         </nav>
 
-        <img src={cart} alt="Ícone do carrinho de compras" />
+        <img onClick={openCart} src={cart} alt="Ícone do carrinho de compras" />
       </div>
 
-      <div className="container-produto-header">{local.pathname === "/" ? <ProdutoHeader /> : ""}</div>
+      <div  className="container-produto-header">{local.pathname === "/" ? <ProdutoHeader /> : ""}</div>
 
     </header>
   );

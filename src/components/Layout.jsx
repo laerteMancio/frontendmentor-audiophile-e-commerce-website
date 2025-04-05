@@ -22,8 +22,13 @@ import Zx9Speaker from "../pages/detalhes-produtos/speakers/Zx9Speaker"
 //Earphone
 import Yx1WirelessEarPhones from "../pages/detalhes-produtos/earphones/Yx1WirelessEarPhones"
 
+// Checkout
+import Checkout from './Checkout';
+
+
+
 const Layout = () => {
-  return (
+  return (    
     <Routes>
       <Route path="/" element={<Home />} />
       {/* rotas categorias*/}
@@ -39,6 +44,8 @@ const Layout = () => {
       <Route path="/Zx9Speaker" element={<Zx9Speaker />} />
       {/* rotas earphones*/}
       <Route path="/Yx1WirelessEarPhones" element={<Yx1WirelessEarPhones />} />
+      {/* rotas checkout*/}
+      <Route path="/checkout" element={<Checkout />} />
 
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
