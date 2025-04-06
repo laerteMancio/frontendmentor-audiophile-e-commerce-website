@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // DataProvider
 import { useDados } from "../hooks/useDados"
@@ -6,9 +6,16 @@ import { useDados } from "../hooks/useDados"
 import "./QtdProdutos.css"
 
 const QtdProdutos = ({ produto }) => {
+    const { cart, setCart } = useDados();
 
-    const [qtdProduto, setQtdProduto] = useState(0)
-    const { setCart } = useDados()
+    const [qtdProduto, setQtdProduto] = useState(0); 
+
+    useEffect(() => {
+        const itemNoCarrinho = cart.find(item => item.id === produto.id);
+        if (itemNoCarrinho) {
+            setQtdProduto(itemNoCarrinho.qtd);  
+        }
+    }, [cart, produto.id]);
 
     const adicionar = () => {
         setQtdProduto(prev => prev + 1);
@@ -21,18 +28,32 @@ const QtdProdutos = ({ produto }) => {
     }
 
     const addToCart = () => {
-        setCart(prev => [
-            ...prev,
-            {
-                id: produto.id,
-                descricao: produto.descricao,
-                valor: parseFloat(parseFloat(produto.preco).toFixed(3)),
-                qtd: qtdProduto,
-                imagem: produto.imagemPrincipal
-            }
-        ]);
+        if (qtdProduto <= 0) {
+            alert("A quantidade não pode ser 0 para adicionar ao carrinho!");
+            return;
+        }
+        
+        const itemNoCarrinho = cart.find(item => item.id === produto.id);
+        
+        if (itemNoCarrinho) {            
+            setCart(prevCart => 
+                prevCart.map(item => 
+                    item.id === produto.id ? { ...item, qtd: qtdProduto } : item
+                )
+            );
+        } else {            
+            setCart(prevCart => [
+                ...prevCart,
+                {
+                    id: produto.id,
+                    descricao: produto.descricao,
+                    valor: parseFloat(parseFloat(produto.preco).toFixed(3)),
+                    qtd: qtdProduto,
+                    imagem: produto.imagemPrincipal
+                }
+            ]);
+        }
     }
-
 
     return (
         <>
@@ -48,4 +69,4 @@ const QtdProdutos = ({ produto }) => {
     )
 }
 
-export default QtdProdutos
+export default QtdProdutos;

@@ -25,13 +25,13 @@ export const DadosProviderComponent = ({ children }) => {
         }
       }
 
-      return newState;  
+      return newState;
     });
   };
 
   const closeCart = () => {
     setCallCart(false);
-    
+
     if (layoutRef.current) {
       layoutRef.current.classList.remove('clicked');
     }

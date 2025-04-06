@@ -1,0 +1,54 @@
+
+.cart-itens {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.cart-preco-desc-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+#descricao-itens {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+#preco-itens {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 25px;
+  opacity: 50%;
+}
+
+#qtd-produtos-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 96px;
+  height: 32px;
+
+  font-size: 13px;
+}
+
+.cart-produto-qtd-itens {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  min-width: 96px;
+  min-height: 32px;
+  gap: 10px;
+
+  background-color: var(--cinza-escuro);
+}
+
+

@@ -27,8 +27,20 @@
   object-fit: contain;
   border: none;
   border-radius: 10px;
+}
 
-  
+.cart-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  margin-top: 10%;
+
+  gap: 20px;
 }
 
 .cart-top {
@@ -45,76 +57,7 @@
   line-height: 25px;
 }
 
-.cart-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  margin-top: 10%;
-
-}
-
-.cart-itens {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 100%;
-
-}
-
-.cart-preco-desc{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-
-  
-}
-
-#descricao {
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 25px;
-  
-}
-
-#preco {
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 25px;
-  opacity: 50%;
-}
-
-#qtd-produtos {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 96px;
-  height: 32px;
-
-  font-size: 13px;
-}
-
-.cart-produto-qtd {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  min-width: 96px;
-  min-height: 32px;
-  gap: 10px;
-
-  background-color: var(--cinza-escuro);
-}
-
-.cart-bottom {
+.cart-bottom- {
   display: flex;
   flex-direction: row;
   justify-content: center;
