@@ -1,4 +1,4 @@
-.container-checkout {
+.container-login {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,11 +14,11 @@
 
 }
 
-.container-checkout .subtitle {
+.container-login .subtitle {
   color: var(--laranja);
 }
 
-.checkout-top {
+.login-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,12 +27,12 @@
   width: 100%;
 }
 
-.checkout-top button {
+.login-top button {
   opacity: 50%;
   line-height: 25px;
 }
 
-.checkout-content {
+.login-content {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -44,7 +44,7 @@
   
 }
 
-.checkout-bottom {
+.login-bottom {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -53,6 +53,6 @@
   width: 100%;
 }
 
-.checkout-bottom button {
+.login-bottom button {
   width: 100%;
 }

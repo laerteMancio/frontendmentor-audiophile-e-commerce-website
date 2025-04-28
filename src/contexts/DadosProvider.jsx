@@ -37,6 +37,11 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
+  const removeAll = ()=>{
+    setCart([])
+  }
+
+
 
   return (
     <DadosContext.Provider
@@ -49,6 +54,7 @@ export const DadosProviderComponent = ({ children }) => {
         callCheckout,
         setCallCheckout,
         layoutRef,
+        removeAll,
       }}
     >
       {children}

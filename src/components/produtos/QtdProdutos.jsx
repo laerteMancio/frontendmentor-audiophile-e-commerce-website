@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 // DataProvider
-import { useDados } from "../hooks/useDados"
+import { useDados } from "../../hooks/useDados"
 
 import "./QtdProdutos.css"
 

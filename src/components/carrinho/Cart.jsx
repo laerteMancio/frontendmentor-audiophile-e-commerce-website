@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import "./Cart.css";
 
 // Dados Provider
-import { useDados } from '../hooks/useDados';
+import { useDados } from '../../hooks/useDados';
 
 // components
 import CartItens from "./CartItens";
 
 const Cart = () => {
-    const { cart, setCart, closeCart } = useDados();
+    const { cart, setCart, closeCart, removeAll } = useDados();
     const tamanho = cart.length;
-    
+
     const atualizaQuantidade = (id, operacao) => {
         setCart((prevCart) =>
             prevCart.map((item) => {
@@ -28,10 +28,11 @@ const Cart = () => {
         <div className='container-carrinho'>
             <div className='cart-top'>
                 <h6>{`Cart (${tamanho})`}</h6>
-                <button>Remove all</button>
+                <button onClick={removeAll} >Remove all</button>
             </div>
 
             <div className="cart-content">
+
                 {tamanho > 0 ? (
                     cart.map((item) => (
                         <CartItens
@@ -43,11 +44,15 @@ const Cart = () => {
                 ) : (
                     <p>O carrinho está vazio.</p>
                 )}
+
             </div>
 
             <div className='cart-bottom'>
+                <span onClick={closeCart} className="default-1">
+                    CONTINUAR COMPRANDO
+                </span>
                 <Link to="/checkout" onClick={closeCart} className="default-1">
-                    CHECKOUT
+                    FINALIZAR COMPRA
                 </Link>
             </div>
         </div>

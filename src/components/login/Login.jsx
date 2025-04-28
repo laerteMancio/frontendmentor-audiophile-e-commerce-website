@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import "./Checkout.css";
+import React, { useState } from 'react';
+import "./Login.css";
 
 // Dados Provider
-import { useDados } from '../hooks/useDados';
+import { useDados } from '../../hooks/useDados';
 
-const Checkout = () => {
-    const { cart, openCheckout } = useDados();
+const Login = () => {
+    const { cart } = useDados();
 
      // Inicializando o estado dos campos do formulário
      const [nome, setNome] = useState('');
@@ -103,7 +103,7 @@ const Checkout = () => {
                             type="cidade"
                             id="cidade"
                             value={cidade}
-                            onChange={(e) => setcidade(e.target.value)}
+                            onChange={(e) => setCidade(e.target.value)}
                             required
                         />
                     </div>
@@ -129,4 +129,4 @@ const Checkout = () => {
     );
 };
 
-export default Checkout;
+export default Login;

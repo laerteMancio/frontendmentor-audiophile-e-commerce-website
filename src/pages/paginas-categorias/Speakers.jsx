@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import "./PaginaProdutos.css"
 
@@ -6,9 +6,25 @@ import "./PaginaProdutos.css"
 import Produtos from "../../components/produtos/Produtos"
 import Categorias from "../../components/produtos/Categorias"
 
-import { SpeakerNew, listaSpeakers } from "../../data/dataProdutos";
+// utils
+import { buscarTabelas } from "../../utils/funcoes"
+
 
 const Speakers = () => {
+
+    const [produtos, setProdutos] = useState([])
+
+    useEffect(() => {
+        const carregar = async () => {
+            const data = await buscarTabelas("produtos/produtos-categorias", { categoriaId: 2 });
+            
+            if (data) {
+                setProdutos(data);
+            }
+        };
+
+        carregar();
+    }, [])
 
     return (
         <main className='container-produtos-pagina'>
@@ -19,19 +35,19 @@ const Speakers = () => {
 
             {/* Produto Novidade */}
             <article className='produto-pagina'>
-                <img className='imagem-produto-pagina' src={SpeakerNew} alt="ZX9 speaker" />
+                {produtos.length > 0 ? <img className='imagem-produto-pagina' src={produtos[0].imagemPrincipal} alt={produtos.descricao} /> : ""}
                 <h1 className='overline'>NEW PRODUCT</h1>
-                <h3>ZX9 speaker</h3>
-                <p>Upgrade your sound system with the all new ZX9 active speaker. It’s a bookshelf speaker system that offers truly wireless connectivity -- creating new possibilities for more pleasing and practical audio setups.</p>
-                <Link to="/Zx9Speaker" className="default-1">SEE PRODUCT</Link>
+                <h3>{produtos.length > 0 ? produtos[0].descricao : ""} </h3>
+                <p>{produtos.length > 0 ? produtos[0].sobre : ""}</p>
+                <Link to={produtos.length > 0 ? produtos[0].link : ""} className="default-1">SEE PRODUCT</Link>
             </article>
 
 
             <section>
-                {listaSpeakers.map((produto, index) => (
+                {produtos.slice(1).map((produto, index) => (
                     <Produtos
                         key={produto.id || index}
-                        imagem={produto.imagem}
+                        imagem={produto.imagemPrincipal}
                         descricao={produto.descricao}
                         sobre={produto.sobre}
                         link={produto.link}

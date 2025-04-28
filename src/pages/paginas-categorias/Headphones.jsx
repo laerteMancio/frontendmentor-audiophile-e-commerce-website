@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./PaginaProdutos.css";
 
@@ -6,9 +6,25 @@ import "./PaginaProdutos.css";
 import Produtos from "../../components/produtos/Produtos"
 import Categorias from "../../components/produtos/Categorias"
 
-import { headphoneNew, listaHeadPhones } from "../../data/dataProdutos";
+// utils
+import { buscarTabelas } from "../../utils/funcoes"
 
 const Headphones = () => {
+
+  const [produtos, setProdutos] = useState([])
+
+  useEffect(() => {
+    const carregar = async () => {
+      const data = await buscarTabelas("produtos/produtos-categorias", { categoriaId: 3 });
+
+      if (data) {
+        setProdutos(data);
+      }
+    };
+
+    carregar();
+  }, [])
+
   return (
     <main className="container-produtos-pagina">
       <section className="container-titulo-categorias">
@@ -17,17 +33,16 @@ const Headphones = () => {
 
       {/* Produto Novidade */}
       <article className="produto-pagina">
-        <img
+        {produtos.length > 0 ? <img
           className="imagem-produto-pagina"
-          src={headphoneNew}
-          alt="XX99 Mark II Headphones"
-        />
+          src={produtos[0].imagemPrincipal}
+          alt={produtos[0].descricao}
+        /> : ""
+        }
         <h1 className="overline">NEW PRODUCT</h1>
-        <h3>XX99 MARK II HEADPHONES</h3>
+        <h3>{produtos.length > 0 ? produtos[0].descricao : ""}</h3>
         <p>
-          The new XX99 Mark II headphones is the pinnacle of pristine audio. It
-          redefines your premium headphone experience by reproducing the
-          balanced depth and precision of studio-quality sound.
+          {produtos.length > 0 ? produtos[0].sobre : ""}
         </p>
         <Link to="/xx99MarkIIHeadphones" className="default-1">
           SEE PRODUCT
@@ -36,10 +51,10 @@ const Headphones = () => {
 
       {/* Lista de Produtos */}
       <section>
-        {listaHeadPhones.map((produto, index) => (
+        {produtos.slice(1).map((produto, index) => (
           <Produtos
             key={produto.id || index}
-            imagem={produto.imagem}
+            imagem={produto.imagemPrincipal}
             descricao={produto.descricao}
             sobre={produto.sobre}
             link={produto.link}
@@ -56,3 +71,4 @@ const Headphones = () => {
 };
 
 export default Headphones;
+

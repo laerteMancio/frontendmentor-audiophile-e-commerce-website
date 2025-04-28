@@ -3,7 +3,8 @@ import "../../detalhes-produtos/DetalhesProdutos.css";
 // Components
 import Categorias from "../../../components/produtos/Categorias";
 import CategoriasDetalhes from '../../../components/produtos/CategoriasDetalhes';
-import QtdProdutos from "../../../components/QtdProdutos";
+import QtdProdutos from '../../../components/produtos/QtdProdutos';
+
 
 // Data
 import { listaDetalhesSpeakers } from "../../../data/dataProdutos";

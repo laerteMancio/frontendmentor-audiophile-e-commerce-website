@@ -3,7 +3,7 @@ import "./CartItens.css";
 
 const CartItens = ({ item, atualizaQuantidade }) => {
     const imagem = item.imagem || '';
-    const descricao = item.descricao ? item.descricao.replace(/Headphones|SPEAKER/gi, '').trim() : '';
+    const descricao = item.descricao ? item.descricao.replace(/Headphones|SPEAKER|EARPHONES|WIRELESS/gi, '').trim() : '';
     const preco = item.valor || 0;
    
     const adicionar = () => {
