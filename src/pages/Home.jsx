@@ -54,20 +54,20 @@ const Home = () => {
           </figure>
           <div className='container-info'>
             <p>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-            <a href="/produto/zx9-speaker" className='default-destaque-1'>SEE PRODUCT</a>
+            <a href="/Zx9Speaker" className='default-destaque-1'>SEE PRODUCT</a>
           </div>
         </article>
 
         <article className='destaques-produtos-2'>
           <h3>ZX7 SPEAKER</h3>
-          <a href="/produto/zx7-speaker" className='default-4'>SEE PRODUCT</a>
+          <a href="/Zx7Speaker" className='default-4'>SEE PRODUCT</a>
         </article>
 
         <article className='destaques-produtos-3'>
           <div className='destaques-3-cima'></div>
           <div className='destaques-3-baixo'>
             <h3>YX1 EARPHONES</h3>
-            <a href="/produto/yx1-earphones" className='default-4'>SEE PRODUCT</a>
+            <a href="/Yx1WirelessEarPhones" className='default-4'>SEE PRODUCT</a>
           </div>
         </article>
       </section>

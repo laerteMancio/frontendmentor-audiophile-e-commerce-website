@@ -9,7 +9,7 @@ import Cart from "./components/carrinho/Cart"
 import { useDados } from './hooks/useDados'
 
 function App() {  
-  const { callCart, closeCart, layoutRef } = useDados()
+  const { callCart, closeCart, layoutRef, closeMenu } = useDados()
     
  
 
@@ -24,7 +24,7 @@ function App() {
         <Header />
       </div>      
       
-      <div ref={layoutRef} onClick={closeCart} className='layout'>
+      <div ref={layoutRef} onClick={() => (closeCart(), closeMenu())} className='layout'>
         <Layout />
       </div>
       <div onClick={closeCart} className='footer'>

@@ -8,11 +8,14 @@ export const DadosProviderComponent = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [callCart, setCallCart] = useState(false);
   const [callCheckout, setCallCheckout] = useState(false);
+  const [callMenu, setCallMenu] = useState(false);
 
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
+  const menuRef = useRef(null);
 
   const openCart = () => {
+
 
     setCallCart((prevState) => {
       const newState = !prevState;
@@ -37,7 +40,39 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
-  const removeAll = ()=>{
+
+
+  const openMenu = () => {
+
+    setCallMenu((prevState) => {      
+      const newState = !prevState;
+
+      if (newState) {
+        menuRef.current.classList.add('clicked');
+      } else {
+        menuRef.current.classList.remove('clicked');
+      }
+
+
+      return newState;
+    });
+  };
+
+  const closeMenu = () => {
+    setCallMenu(false)
+
+    if (menuRef.current) {
+      menuRef.current.classList.remove('clicked');
+    }
+  };
+
+
+
+
+
+
+
+  const removeAll = () => {
     setCart([])
   }
 
@@ -55,6 +90,9 @@ export const DadosProviderComponent = ({ children }) => {
         setCallCheckout,
         layoutRef,
         removeAll,
+        menuRef,
+        openMenu,
+        closeMenu
       }}
     >
       {children}

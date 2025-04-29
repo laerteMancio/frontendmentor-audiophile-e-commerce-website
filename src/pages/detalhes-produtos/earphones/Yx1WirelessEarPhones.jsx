@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+
+//styles
 import "../../detalhes-produtos/DetalhesProdutos.css";
 
 // Components
@@ -5,11 +8,33 @@ import Categorias from "../../../components/produtos/Categorias";
 import CategoriasDetalhes from '../../../components/produtos/CategoriasDetalhes';
 import QtdProdutos from '../../../components/produtos/QtdProdutos';
 
-// Data
-import { listaDetalhesEarPhones } from "../../../data/dataProdutos";
+// utils
+import { buscarTabelas, processarItensInTheBox } from "../../../utils/funcoes"
+
 
 const Yx1WirelessEarPhones = () => {
-    const produto = listaDetalhesEarPhones[0];
+
+
+    const [produto, setProduto] = useState([])
+    const [boxItems, setBoxItems] = useState([])
+
+    useEffect(() => {
+        const carregar = async () => {
+            const data = await buscarTabelas("produtos/produtos-id", { produtoId: 6 });
+            if (data) {
+                setProduto(data[0])
+                setBoxItems(processarItensInTheBox(data[0].inTheBox))
+            }
+        };
+
+        carregar();
+
+
+    }, [])
+
+
+
+
 
 
     return (
@@ -28,11 +53,11 @@ const Yx1WirelessEarPhones = () => {
 
                     <h4>IN THE BOX</h4>
                     <ul>
-                        {produto.inTheBox.map((item, index) => (
+                        {boxItems.length > 0 ? boxItems.map((item, index) => (
                             <li key={index}>
                                 <strong className='detalhes-span-qtd'>{item.quantidade}</strong> <span>{item.descricao}</span>
                             </li>
-                        ))}
+                        )) : []}
                     </ul>
                 </article>
             </section>

@@ -15,8 +15,7 @@ const Headphones = () => {
 
   useEffect(() => {
     const carregar = async () => {
-      const data = await buscarTabelas("produtos/produtos-categorias", { categoriaId: 3 });
-
+      const data = await buscarTabelas("produtos/produtos-categorias", { categoriaId: 3 });      
       if (data) {
         setProdutos(data);
       }
@@ -44,7 +43,7 @@ const Headphones = () => {
         <p>
           {produtos.length > 0 ? produtos[0].sobre : ""}
         </p>
-        <Link to="/xx99MarkIIHeadphones" className="default-1">
+        <Link to = {produtos.length > 0 ? produtos[0].link : ""} className="default-1">
           SEE PRODUCT
         </Link>
       </article>

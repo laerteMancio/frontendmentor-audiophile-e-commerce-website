@@ -17,23 +17,23 @@ import { useDados } from "../hooks/useDados";
 
 const Header = () => {
   const local = useLocation()
-  const { openCart } = useDados()
+  const { openCart, menuRef, openMenu, closeMenu } = useDados()
   
 
   return (
-    <header className={`container-header ${local.pathname === "/" ? "" : "background-header"}`}>      
+    <header onClick={closeMenu} className={`container-header ${local.pathname === "/" ? "" : "background-header"}`}>      
       <div className="menu-navegacao">
-        <div className="hamburguer">
+        <div onClick={openMenu} className="hamburguer">
           <div></div>
           <div></div>
           <div></div>
         </div>
         <img  src={logo} alt="Logo" />
 
-        <nav  className="menu-pagina">
+        <nav ref={menuRef} className="menu-pagina">
           <ul>
             <li>
-              <a href="/home">HOME</a>
+              <a href="/">HOME</a>
             </li>
             <li>
               <a href="/headphones">HEADPHONES</a>

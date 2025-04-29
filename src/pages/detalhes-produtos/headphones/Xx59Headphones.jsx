@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+
+//styles
 import "../../detalhes-produtos/DetalhesProdutos.css";
 
 // Components
@@ -5,11 +8,26 @@ import Categorias from "../../../components/produtos/Categorias";
 import CategoriasDetalhes from '../../../components/produtos/CategoriasDetalhes';
 import QtdProdutos from '../../../components/produtos/QtdProdutos';
 
-// Data
-import { listaDetalhesHeadPhones } from "../../../data/dataProdutos";
+// utils
+import { buscarTabelas, processarItensInTheBox } from "../../../utils/funcoes"
 
 const Xx59Headphones = () => {
-    const produto = listaDetalhesHeadPhones[2];
+    const [produto, setProduto] = useState([])
+    const [boxItems, setBoxItems] = useState([])
+
+    useEffect(() => {
+        const carregar = async () => {
+            const data = await buscarTabelas("produtos/produtos-id", { produtoId: 3 });
+            if (data) {
+                setProduto(data[0])
+                setBoxItems(processarItensInTheBox(data[0].inTheBox))
+            }
+        };
+
+        carregar();
+
+
+    }, [])
 
     return (
         <main className='container-detalhes-pagina'>
@@ -27,7 +45,7 @@ const Xx59Headphones = () => {
 
                     <h4>IN THE BOX</h4>
                     <ul>
-                        {produto.inTheBox.map((item, index) => (
+                        {boxItems.map((item, index) => (
                             <li key={index}>
                                 <strong className='detalhes-span-qtd'>{item.quantidade}</strong> <span>{item.descricao}</span>
                             </li>

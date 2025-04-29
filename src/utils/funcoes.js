@@ -20,3 +20,15 @@ export const buscarTabelas = async (rota, parametros = {}) => {
     throw err;
   }
 };
+
+
+// Função para dividir os itens
+export function processarItensInTheBox(listaInTheBox) {
+  return listaInTheBox.split(",").map((item) => {
+    const [quantidade, ...descricao] = item.trim().split(" ");
+    return {
+      quantidade: quantidade,
+      descricao: descricao.join(" "), // Junta novamente a descrição que pode ter espaços
+    };
+  });
+}

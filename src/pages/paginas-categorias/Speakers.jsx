@@ -17,7 +17,7 @@ const Speakers = () => {
     useEffect(() => {
         const carregar = async () => {
             const data = await buscarTabelas("produtos/produtos-categorias", { categoriaId: 2 });
-            
+
             if (data) {
                 setProdutos(data);
             }
@@ -39,7 +39,9 @@ const Speakers = () => {
                 <h1 className='overline'>NEW PRODUCT</h1>
                 <h3>{produtos.length > 0 ? produtos[0].descricao : ""} </h3>
                 <p>{produtos.length > 0 ? produtos[0].sobre : ""}</p>
-                <Link to={produtos.length > 0 ? produtos[0].link : ""} className="default-1">SEE PRODUCT</Link>
+                <Link to={produtos.length > 0 ? produtos[0].link : ""} className="default-1">
+                    SEE PRODUCT
+                </Link>
             </article>
 
 
