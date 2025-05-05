@@ -21,6 +21,35 @@ export const buscarTabelas = async (rota, parametros = {}) => {
   }
 };
 
+export const enviarDados = async (rota, dados = {}, incluirCredenciais = false) => {
+  try {
+    const url = `http://localhost:3000/${rota}`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: incluirCredenciais ? "include" : "same-origin",
+      body: JSON.stringify(dados),
+    });
+
+    const contentType = res.headers.get("content-type");
+
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error("Resposta não é JSON");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("Erro ao enviar dados:", err);
+    throw err;
+  }
+};
+
+
+
 
 // Função para dividir os itens
 export function processarItensInTheBox(listaInTheBox) {

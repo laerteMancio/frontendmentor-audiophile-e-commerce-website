@@ -10,6 +10,13 @@ export const DadosProviderComponent = ({ children }) => {
   const [callCheckout, setCallCheckout] = useState(false);
   const [callMenu, setCallMenu] = useState(false);
 
+  const [usuarioId, setUsuarioId] = useState(null)
+
+  useEffect(() => {
+    console.log(usuarioId);
+  }, [usuarioId])
+
+
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
   const menuRef = useRef(null);
@@ -44,7 +51,7 @@ export const DadosProviderComponent = ({ children }) => {
 
   const openMenu = () => {
 
-    setCallMenu((prevState) => {      
+    setCallMenu((prevState) => {
       const newState = !prevState;
 
       if (newState) {
@@ -66,15 +73,24 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
-
-
-
-
-
-
   const removeAll = () => {
     setCart([])
   }
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:3000/usuarios/logout", {
+        method: "GET",
+        credentials: "include",
+      });
+  
+      setUsuarioId(null);
+    } catch (err) {
+      console.error("Erro ao fazer logout:", err);
+    }
+  };
+  
+
 
 
 
@@ -92,7 +108,9 @@ export const DadosProviderComponent = ({ children }) => {
         removeAll,
         menuRef,
         openMenu,
-        closeMenu
+        closeMenu,
+        setUsuarioId,
+        handleLogout
       }}
     >
       {children}

@@ -1,130 +1,84 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+
+//utils
+import { enviarDados } from '../../utils/funcoes';
+
+//context
+import { useDados } from "../../hooks/useDados";
+
 import "./Login.css";
 
-// Dados Provider
-import { useDados } from '../../hooks/useDados';
-
 const Login = () => {
-    const { cart } = useDados();
 
-     // Inicializando o estado dos campos do formulário
-     const [nome, setNome] = useState('');
-     const [email, setEmail] = useState('');
-     const [telefone, setTelefone] = useState('');
-     const [endereco, setEndereco] = useState('')
-     const [cep, setCep] = useState('')
-     const [cidade, setCidade] = useState('')
-     const [pais, setPais] = useState('')
- 
-     const handleSubmit = (e) => {
-         e.preventDefault();
-         
-         // Tratar envio de dados para a API
-         
-         setNome('');
-         setEmail('');
-         setTelefone('');
-         setEndereco('');
-         setCep('');
-         setCidade('');
-         setPais('');
-         
-     };
+    const { setUsuarioId } = useDados()
+
+    // Inicializando o estado dos campos do formulário     
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const dados = {
+            email,
+            senha,
+        };
+
+        try {
+            const resposta = await enviarDados("usuarios/login", dados, true);
+
+            setUsuarioId({ id: resposta.usuario.id, nome: resposta.usuario.nome })
+
+            setEmail('');
+            setSenha('');
+        } catch (erro) {
+            console.log("Erro no login");
+
+        }
+    };
+
 
     return (
-        <div className='container-checkout'>
-            <div className='checkout-top'>
-                <button>Go back</button>
-            </div>
-            <div className='checkout-content'>
-                <h4>CHECKOUT</h4>
-                <h5 className='subtitle'>Detalhes de cobrança</h5>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="nome">Nome:</label>
-                        <input
-                            type="text"
-                            id="nome"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}  
-                            required
-                        />
-                    </div>
+        <div className='container-login'>
 
-                    <div>
-                        <label htmlFor="email">E-mail:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
+            <h4>LOGIN</h4>
+            <form onSubmit={handleSubmit}>
+                <div className='form-campos'>
 
-                    <div>
-                        <label htmlFor="telefone">Telefone:</label>
-                        <input
-                            type="telefone"
-                            id="telefone"
-                            value={telefone}
-                            onChange={(e) => setTelefone(e.target.value)}
-                            required
-                        />
-                    </div>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        placeholder='Email'
+                    />
+                </div>
 
-                    <h4 className='subtitle'>informações de envio</h4>
+                <div className='form-campos'>
 
-                    <div>
-                        <label htmlFor="endereco">Endereço:</label>
-                        <input
-                            type="endereco"
-                            id="endereco"
-                            value={endereco}
-                            onChange={(e) => setEndereco(e.target.value)}
-                            required
-                        />
-                    </div>
+                    <input
+                        type="password"
+                        id="senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        required
+                        placeholder='Senha'
+                    />
+                </div>
 
-                    <div>
-                        <label htmlFor="cep">CEP:</label>
-                        <input
-                            type="cep"
-                            id="cep"
-                            value={cep}
-                            onChange={(e) => setCep(e.target.value)}
-                            required
-                        />
-                    </div>
 
-                    <div>
-                        <label htmlFor="cidade">Cidade:</label>
-                        <input
-                            type="cidade"
-                            id="cidade"
-                            value={cidade}
-                            onChange={(e) => setCidade(e.target.value)}
-                            required
-                        />
-                    </div>
+                <div className='acesso-usuarios'>
+                    <Link to="/recuperar-senha" >Esqueci a senha</Link>
+                    <Link to="/usuarios" >Cadastrar</Link>
+                </div>
 
-                    <div>
-                        <label htmlFor="pais">Pais:</label>
-                        <input
-                            type="pais"
-                            id="pais"
-                            value={pais}
-                            onChange={(e) => setPais(e.target.value)}
-                            required
-                        />
-                    </div>
+                <button className='default-login' type="submit">Entrar</button>
+            </form>
 
-                    <h4 className='subtitle'>Detalhes do pagamento</h4>
 
-                    <button className='default-1' type="submit">Enviar</button>
-                </form>
-            </div>
-            
         </div>
     );
 };

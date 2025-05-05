@@ -22,6 +22,9 @@ import Zx9Speaker from "../pages/detalhes-produtos/speakers/Zx9Speaker"
 //Earphone
 import Yx1WirelessEarPhones from "../pages/detalhes-produtos/earphones/Yx1WirelessEarPhones"
 
+//Endereco
+import FormularioEndereco from '../pages/dados-usuarios/FormularioEndereco';
+
 // Checkout
 import Login from './login/Login';
 
@@ -46,7 +49,8 @@ const Layout = () => {
       <Route path="/Yx1WirelessEarPhones" element={<Yx1WirelessEarPhones />} />
       {/* rotas login*/}
       <Route path="/login" element={<Login />} />
-
+      {/* Dados usuario */}
+      <Route path="/endereco" element={<FormularioEndereco />} />
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
     </Routes>

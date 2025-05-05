@@ -149,6 +149,17 @@ p {
   text-align: center;
 }
 
+.default-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  min-height: 48px;
+  background-color: var(--laranja);
+  color: var(--branco);
+  text-align: center;
+}
+
 .default-2 {
   display: flex;
   justify-content: center;
