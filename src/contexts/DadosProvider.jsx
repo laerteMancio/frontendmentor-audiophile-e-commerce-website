@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect } from "react";
+import { createContext, useState, useRef, useEffect, useReducer  } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Criando o contexto
@@ -6,6 +6,28 @@ const DadosContext = createContext();
 
 // Provedor do contexto
 export const DadosProviderComponent = ({ children }) => {
+
+  const initialState = { componenteAtivo: "Pedidos" };
+
+const componentesReducer = (state, action) => {
+  switch (action.type) {
+    case "MOSTRAR_PEDIDOS":
+      return { componenteAtivo: "Pedidos" };
+    case "MOSTRAR_TROCAS":
+      return { componenteAtivo: "Trocas" };
+    case "MOSTRAR_VALES":
+      return { componenteAtivo: "Vales" };
+    case "MOSTRAR_SEUS_DADOS":
+      return { componenteAtivo: "SeusDados" };
+    case "MOSTRAR_ENDERECOS":
+      return { componenteAtivo: "Enderecos" };
+    default:
+      return state;
+  }
+};
+
+const [componenteState, componenteDispatch] = useReducer(componentesReducer, initialState);
+
 
   const navigate = useNavigate();
 
@@ -175,7 +197,9 @@ export const DadosProviderComponent = ({ children }) => {
         closeMenuLogado,
         setaRef,
         setConta,
-        conta
+        conta,
+        componenteState,
+        componenteDispatch
       }}
     >
       {children}

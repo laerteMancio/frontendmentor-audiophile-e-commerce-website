@@ -20,7 +20,7 @@ import { useDados } from "../hooks/useDados";
 
 const Header = () => {
   const local = useLocation()
-  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta } = useDados()
+  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta, componenteDispatch } = useDados()
 
   return (
     <header onClick={() => (closeMenu(), closeMenuLogado())}
@@ -35,52 +35,52 @@ const Header = () => {
 
         <img src={logo} alt="Logo" />
 
-        {!conta ? 
-        <nav ref={menuRef} className="menu-pagina">
-          <ul>
-            <li>
-              <a href="/">HOME</a>
-            </li>
-            <li>
-              <a href="/headphones">HEADPHONES</a>
-            </li>
-            <li>
-              <a href="/speakers">SPEAKERS</a>
-            </li>
-            <li>
-              <a href="/earphones">EARPHONES</a>
-            </li>
-            <li>
-              <a href="/endereco">ENDEREÇO</a>
-            </li>
-            <li>
-              <a onClick={handleLogout} href="#">SAIR</a>
-            </li>
-          </ul>
-        </nav> :
-        
-        <nav ref={menuRef} className="menu-pagina">
-          <ul>
-            <li>
-              <a href="#">Pedidos</a>
-            </li>
-            <li>
-              <a href="#">Trocas</a>
-            </li>
-            <li>
-              <a href="#">Vales</a>
-            </li>
-            <li>
-              <a href="/earphones">Seus dados</a>
-            </li>
-            <li>
-              <a href="/endereco">Endereços</a>
-            </li>
-            <li>
-              <a onClick={handleLogout} href="#">Sair</a>
-            </li>
-          </ul>
-        </nav>
+        {!conta ?
+          <nav ref={menuRef} className="menu-pagina">
+            <ul>
+              <li>
+                <Link to="/">HOME</Link>
+              </li>
+              <li>
+                <Link to="/headphones">HEADPHONES</Link>
+              </li>
+              <li>
+                <Link to="/speakers">SPEAKERS</Link>                
+              </li>
+              <li>
+                <Link to="/earphones">EARPHONES</Link>                
+              </li>
+              <li>
+                <Link to="/endereco">ENDEREÇO</Link>                
+              </li>
+              <li>
+                <a onClick={handleLogout} href="#">SAIR</a>
+              </li>
+            </ul>
+          </nav> :
+
+          <nav ref={menuRef} className="menu-pagina">
+            <ul>
+
+              <li onClick={() => componenteDispatch({ type: "MOSTRAR_PEDIDOS" })}>Pedidos</li>
+
+
+              <li onClick={() => componenteDispatch({ type: "MOSTRAR_TROCAS" })}>Trocas</li>
+
+
+              <li onClick={() => componenteDispatch({ type: "MOSTRAR_VALES" })}>Vales</li>
+
+
+              <li onClick={() => componenteDispatch({ type: "MOSTRAR_SEUS_DADOS" })}>Seus Dados</li>
+
+
+              <li onClick={() => componenteDispatch({ type: "MOSTRAR_ENDERECOS" })}>Enderecos</li>
+
+              <li>
+                <button onClick={handleLogout}>Sair</button>
+              </li>
+            </ul>
+          </nav>
         }
         <div className="menu-icones">
 
@@ -93,7 +93,7 @@ const Header = () => {
 
                 <ul>
                   <li>
-                    <Link onClick={()=>setConta(true)} to={"/dados-usuario"}> Meus dados</Link>
+                    <Link onClick={() => setConta(true)} to={"/dados-usuario"}> Meus dados</Link>
                   </li>
                   <li>
                     <a href="#">Minhas Compras</a>
