@@ -12,8 +12,9 @@ export const DadosProviderComponent = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [callCart, setCallCart] = useState(false);
   const [callCheckout, setCallCheckout] = useState(false);
-  const [callMenu, setCallMenu] = useState(false);
+  const [callMenu, setCallMenu] = useState(false);  
   const [callMenuLogado, setCallMenuLogado] = useState(false);
+  const [conta, setConta] = useState(false)
 
   const [usuarioId, setUsuarioId] = useState(null)
 
@@ -24,7 +25,7 @@ export const DadosProviderComponent = ({ children }) => {
 
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
-  const menuRef = useRef(null);
+  const menuRef = useRef(null);  
   const menuLogadoRef = useRef(null);
   const setaRef = useRef(null);
 
@@ -172,7 +173,9 @@ export const DadosProviderComponent = ({ children }) => {
         verificarUsuarioLogado,
         menuLogadoRef,
         closeMenuLogado,
-        setaRef
+        setaRef,
+        setConta,
+        conta
       }}
     >
       {children}

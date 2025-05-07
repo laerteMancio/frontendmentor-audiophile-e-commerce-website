@@ -176,3 +176,34 @@
 .seta.clicked {
   display: flex;
 }
+
+
+.menu-pagina-conta {
+  display: none;
+}
+
+.menu-pagina-conta.clicked {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  padding-top: 10%;
+
+  width: 50%;
+  height: 100%;
+
+  background-color: white;
+  color: black;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  z-index: 10;
+}
+
+.menu-pagina-conta ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

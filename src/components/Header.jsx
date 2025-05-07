@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { User } from "lucide-react";
 
@@ -20,7 +20,7 @@ import { useDados } from "../hooks/useDados";
 
 const Header = () => {
   const local = useLocation()
-  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef } = useDados()
+  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta } = useDados()
 
   return (
     <header onClick={() => (closeMenu(), closeMenuLogado())}
@@ -35,6 +35,7 @@ const Header = () => {
 
         <img src={logo} alt="Logo" />
 
+        {!conta ? 
         <nav ref={menuRef} className="menu-pagina">
           <ul>
             <li>
@@ -56,8 +57,31 @@ const Header = () => {
               <a onClick={handleLogout} href="#">SAIR</a>
             </li>
           </ul>
+        </nav> :
+        
+        <nav ref={menuRef} className="menu-pagina">
+          <ul>
+            <li>
+              <a href="#">Pedidos</a>
+            </li>
+            <li>
+              <a href="#">Trocas</a>
+            </li>
+            <li>
+              <a href="#">Vales</a>
+            </li>
+            <li>
+              <a href="/earphones">Seus dados</a>
+            </li>
+            <li>
+              <a href="/endereco">Endereços</a>
+            </li>
+            <li>
+              <a onClick={handleLogout} href="#">Sair</a>
+            </li>
+          </ul>
         </nav>
-
+        }
         <div className="menu-icones">
 
 
@@ -69,13 +93,13 @@ const Header = () => {
 
                 <ul>
                   <li>
-                    <a href="#">Meus dados</a>
+                    <Link onClick={()=>setConta(true)} to={"/dados-usuario"}> Meus dados</Link>
                   </li>
                   <li>
                     <a href="#">Minhas Compras</a>
                   </li>
                   <li>
-                    <a href="#">Logout</a>
+                    <a href="#">Sair</a>
                   </li>
                 </ul>
               </nav>
