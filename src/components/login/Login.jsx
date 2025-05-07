@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //utils
 import { enviarDados } from '../../utils/funcoes';
@@ -12,6 +12,7 @@ import "./Login.css";
 const Login = () => {
 
     const { setUsuarioId } = useDados()
+    const navigate = useNavigate()
 
     // Inicializando o estado dos campos do formulário     
     const [email, setEmail] = useState('');
@@ -27,12 +28,13 @@ const Login = () => {
         };
 
         try {
-            const resposta = await enviarDados("usuarios/login", dados, true);
-
+            const resposta = await enviarDados("usuarios/login", dados, true);            
             setUsuarioId({ id: resposta.usuario.id, nome: resposta.usuario.nome })
 
             setEmail('');
             setSenha('');
+
+            navigate("/");
         } catch (erro) {
             console.log("Erro no login");
 
@@ -54,6 +56,7 @@ const Login = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         placeholder='Email'
+                        autoComplete='username'
                     />
                 </div>
 
@@ -66,6 +69,7 @@ const Login = () => {
                         onChange={(e) => setSenha(e.target.value)}
                         required
                         placeholder='Senha'
+                        autoComplete='current-password'
                     />
                 </div>
 

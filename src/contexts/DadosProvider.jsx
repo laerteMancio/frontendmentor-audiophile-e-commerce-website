@@ -1,14 +1,19 @@
 import { createContext, useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Criando o contexto
 const DadosContext = createContext();
 
 // Provedor do contexto
 export const DadosProviderComponent = ({ children }) => {
+
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState([]);
   const [callCart, setCallCart] = useState(false);
   const [callCheckout, setCallCheckout] = useState(false);
   const [callMenu, setCallMenu] = useState(false);
+  const [callMenuLogado, setCallMenuLogado] = useState(false);
 
   const [usuarioId, setUsuarioId] = useState(null)
 
@@ -20,6 +25,8 @@ export const DadosProviderComponent = ({ children }) => {
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
   const menuRef = useRef(null);
+  const menuLogadoRef = useRef(null);
+  const setaRef = useRef(null);
 
   const openCart = () => {
 
@@ -46,8 +53,6 @@ export const DadosProviderComponent = ({ children }) => {
       layoutRef.current.classList.remove('clicked');
     }
   };
-
-
 
   const openMenu = () => {
 
@@ -83,14 +88,66 @@ export const DadosProviderComponent = ({ children }) => {
         method: "GET",
         credentials: "include",
       });
-  
+
       setUsuarioId(null);
     } catch (err) {
       console.error("Erro ao fazer logout:", err);
     }
   };
-  
 
+  const openMenuLogado = () => {
+
+    setCallMenuLogado((prevState) => {
+      const newState = !prevState;
+
+      if (newState) {
+        setaRef.current.classList.add('clicked');
+        menuLogadoRef.current.classList.add('clicked');
+      } else {
+        setaRef.current.classList.remove('clicked');
+        menuLogadoRef.current.classList.remove('clicked');
+      }
+
+
+      return newState;
+    });
+  };
+
+  const closeMenuLogado = () => {
+    setCallMenuLogado(false)
+
+    if (menuLogadoRef.current) {
+      menuLogadoRef.current.classList.remove('clicked');
+      setaRef.current.classList.remove('clicked');
+    }
+  };
+
+  const verificarUsuarioLogado = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/usuarios/usuario-logado", {
+        credentials: "include",
+      });
+  
+      if (!res.ok) {
+        setUsuarioId(null);
+        navigate("/login");
+        return; 
+      } else {
+        openMenuLogado()
+      }
+  
+      const data = await res.json();
+      setUsuarioId({ id: data.id, nome: data.nome });      
+      
+    } catch (err) {
+      console.log("Erro ao verificar autenticação:", err);
+      setUsuarioId(null);
+      navigate("/login");
+    }
+  };
+
+ 
+  
 
 
 
@@ -110,7 +167,12 @@ export const DadosProviderComponent = ({ children }) => {
         openMenu,
         closeMenu,
         setUsuarioId,
-        handleLogout
+        usuarioId,
+        handleLogout,
+        verificarUsuarioLogado,
+        menuLogadoRef,
+        closeMenuLogado,
+        setaRef
       }}
     >
       {children}
