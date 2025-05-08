@@ -5,7 +5,7 @@ import { useDados } from '../../hooks/useDados'
 
 import "./Dados.css"
 
-import Pedidos from './Pedidos';
+import Pedidos from './pedidos/Pedidos';
 import Trocas from './Trocas';
 import Vales from './Vales';
 import SeusDados from './SeusDados';
@@ -16,7 +16,7 @@ const Dados = () => {
     return (
         <div className='container-conta-usuario'>
             <Link onClick={() => setConta(false)} to={"/"}>Voltar</Link>
-            <div>
+            <div className='conta-lista-componentes'>
                 {componenteState.componenteAtivo === "Pedidos" && <Pedidos />}
                 {componenteState.componenteAtivo === "Trocas" && <Trocas />}
                 {componenteState.componenteAtivo === "Vales" && <Vales />}
