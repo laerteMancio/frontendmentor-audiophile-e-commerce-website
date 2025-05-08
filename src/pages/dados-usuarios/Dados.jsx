@@ -8,7 +8,7 @@ import "./Dados.css"
 import Pedidos from '../dados-usuarios/pedidos/Pedidos';
 import Trocas from '../dados-usuarios/trocas/Trocas';
 import Vales from '../dados-usuarios/vales/Vales';
-import SeusDados from './SeusDados';
+import SeusDados from '../dados-usuarios/seus-dados/SeusDados';
 import Enderecos from './Enderecos';
 
 const Dados = () => {

@@ -1,0 +1,42 @@
+.container-seus-dados {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+}
+
+.container-seus-dados button{
+  width: 90%;
+  margin: 0 auto;
+}
+
+
+.container-seus-dados-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 25px;
+
+  margin-bottom: 10%;
+}
+
+.seus-dados-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  width: 100%;
+}
+
+.seus-dados-itens input, select{
+  width: 90%;
+}
+
+
