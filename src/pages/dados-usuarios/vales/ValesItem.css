@@ -1,0 +1,65 @@
+.container-componente-vales {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 25px;
+}
+
+.container-componente-vales h6{
+  color: var(--coral);
+  font-weight: bolder;
+}
+
+
+.detalhes-vale {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 10px;
+  
+}
+
+
+.caixa-dados-vale {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+    
+}
+
+
+.itens-vale {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  gap: 5px;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.caixa-valor-vale {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+
+  width: 100%;
+
+    
+}

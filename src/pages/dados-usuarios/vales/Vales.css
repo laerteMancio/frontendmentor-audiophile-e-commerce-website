@@ -1,0 +1,63 @@
+.container-vales {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 10px;
+}
+
+.container-vales-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 100px;
+}
+
+
+.caixa-vales {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 10px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--cinza-escuro);
+
+  margin-bottom: 20%;
+}
+
+.dados-vales {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+}
+
+
+.item-vales {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 12px;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 10px 0 10px;
+}
