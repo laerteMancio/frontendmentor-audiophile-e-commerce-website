@@ -1,0 +1,108 @@
+.container-componente-Trocas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 10px;
+}
+
+.caixa-Trocas {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 10px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--cinza-escuro);
+}
+
+.caixa-Trocas img {
+  display: block;
+  max-width: 30%;
+  height: auto;
+  object-fit: contain;
+  border: none;
+}
+
+.dados-Trocas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+}
+
+.item-Trocas {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 12px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.caixa-status-entrega {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 10px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--cinza-escuro);
+}
+
+.caixa-status-entrega button {
+  width: 80%;
+}
+
+.status-entrega {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 5px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.entrega-status {
+  color: var(--coral);
+}
+
+.caixa-mensagem-troca{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 20px;
+
+  margin: 0 auto;
+
+  text-align: center;
+
+  background-color: linen;
+}

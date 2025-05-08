@@ -5,8 +5,8 @@ import { useDados } from '../../hooks/useDados'
 
 import "./Dados.css"
 
-import Pedidos from './pedidos/Pedidos';
-import Trocas from './Trocas';
+import Pedidos from '../dados-usuarios/pedidos/Pedidos';
+import Trocas from '../dados-usuarios/trocas/Trocas';
 import Vales from './Vales';
 import SeusDados from './SeusDados';
 import Enderecos from './Enderecos';

@@ -1,0 +1,22 @@
+.container-trocas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 10px;
+}
+
+.container-trocas-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 100px;
+}
+
