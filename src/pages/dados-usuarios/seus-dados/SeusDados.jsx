@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./SeusDados.css"
 
 import moment from "moment"
-import { buscarTabelas, mascararEmail, mascararCPF } from "../../../utils/funcoes"
+import { buscarTabelas, enviarDados, mascararEmail, mascararCPF } from "../../../utils/funcoes"
 import { useDados } from '../../../hooks/useDados'
 
 const SeusDados = () => {
@@ -20,21 +20,25 @@ const SeusDados = () => {
     telefone: ""
   });
 
-  const { openModalAlterar, modalAlterarRef, callModalAlterar, closeModalAlterar } = useDados()
+  const { openModalAlterar, modalAlterarRef, callModalAlterar, closeModalAlterar, usuarioId } = useDados()
+
   const [alternaModal, setAlternaModal] = useState("")
+  const [dadosOriginais, setDadosOriginais] = useState({});
 
   useEffect(() => {
     const carregar = async () => {
-      const data = await buscarTabelas("usuarios/usuarios-id", { usuarioId: 1 });
+      const data = await buscarTabelas("usuarios/usuarios-id", { usuarioId: usuarioId.id });
       if (data) {
+        setDadosOriginais(data[0]);
         setFormData((prev) => ({
           ...prev,
           ...data[0]
         }));
       }
+
     };
     carregar();
-  }, [])
+  }, [usuarioId.id])
 
   const dataFormatada = moment(formData.data_nasc).format("YYYY-MM-DD");
 
@@ -43,64 +47,109 @@ const SeusDados = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmitDadosPessoais = async (e) => {
     e.preventDefault();
-    console.log("Dados enviados:", formData);
-    // Aqui você pode enviar para sua API
+  
+    // Filtra os dados pessoais, ignorando campos de email e senha
+    const dadosPessoais = {
+      nome: formData.nome,
+      data_nasc: formData.data_nasc,
+      cpf: formData.cpf,
+      sexo: formData.sexo,
+      telefone: formData.telefone,
+    };
+  
+    // Compara os dados alterados com os dados originais (se houver)
+    const dadosAlterados = {};
+    Object.keys(dadosPessoais).forEach((chave) => {
+      if (dadosPessoais[chave] !== dadosOriginais[chave]) {
+        dadosAlterados[chave] = dadosPessoais[chave];
+      }
+    });
+  
+    // Verifica se há alguma alteração
+    if (Object.keys(dadosAlterados).length === 0) {
+      console.log("Nenhuma alteração foi feita.");
+      return;
+    }
+  
+    try {
+      // Envia os dados alterados para a rota de dados pessoais
+      await enviarDados(`usuarios/${usuarioId.id}/dados-pessoais`, dadosAlterados, false, "PATCH");
+    } catch (erro) {
+      console.error("Erro ao enviar dados:", erro);
+    }
   };
+  
 
-  const handleAlterarEmail = () => {
-    const email1 = formData.novoEmail.trim().toLowerCase();
-    const email2 = formData.confirmarNovoEmail.trim().toLowerCase();
 
-    if (!email1 || !email2) {
-      alert("Preencha os dois campos de e-mail.");
+  const handleSubmitEmail = async (e) => {
+    e.preventDefault();
+  
+    const dadosAlterados = {};
+  
+    // Verificar alteração no email
+    if (formData.email && formData.email !== dadosOriginais.email) {
+      dadosAlterados.email = formData.email;
+    }
+  
+    // Verificar alteração no novo email
+    if (formData.novoEmail && formData.novoEmail !== dadosOriginais.email) {
+      dadosAlterados.email = formData.novoEmail;
+    }
+  
+    // Se não houver alteração, não enviar dados
+    if (Object.keys(dadosAlterados).length === 0) {
+      console.log("Nenhuma alteração no email.");
       return;
     }
+  
+    try {
+      // Envia os dados alterados de email para a API
+      await enviarDados(`usuarios/${usuarioId.id}/email`, dadosAlterados, false, "PATCH");
 
-    if (email1 !== email2) {
-      alert("Os e-mails não coincidem.");
-      return;
+    } catch (erro) {
+      console.error("Erro ao enviar email:", erro);
     }
-
-    // Aqui você pode fazer a requisição de alteração de e-mail na API
-    alert("E-mail alterado com sucesso!");
-    setFormData((prev) => ({
-      ...prev,
-      email: email1,
-      novoEmail: "",
-      confirmarNovoEmail: ""
-    }));
-    closeModalAlterar();
   };
+  
 
-  const handleAlterarSenha = () => {
-    const senha1 = formData.novaSenha.trim().toLowerCase();
-    const senha2 = formData.confirmarNovaSenha.trim().toLowerCase();
 
-    if (!senha1 || !senha2) {
-      alert("Preencha os dois campos de senha.");
+  const handleSubmitSenha = async (e) => {
+    e.preventDefault();
+  
+    if (!formData.novaSenha || !formData.confirmarNovaSenha) {
+      console.log("Preencha todos os campos de senha.");
       return;
     }
-
-    if (senha1 !== senha2) {
-      alert("As senhas não coincidem.");
+  
+    if (formData.novaSenha !== formData.confirmarNovaSenha) {
+      console.log("As senhas não coincidem.");
       return;
     }
+  
+    const dadosSenha = {      
+      novaSenha: formData.novaSenha,
+      confirmarNovaSenha: formData.confirmarNovaSenha,
+    };
 
-    // Aqui você pode fazer a requisição de alteração da senha na API
-    alert("Senha alterada com sucesso!");
-    setFormData((prev) => ({
-      ...prev,
-      senha: senha1,
-      novaSenha: "",
-      confirmarNovaSenha: ""
-    }));
-    closeModalAlterar();
+    
+  
+    try {
+      
+      await enviarDados(`usuarios/${usuarioId.id}/senha`, dadosSenha, false, "PATCH");
+      console.log("Senha atualizada com sucesso.");
+    } catch (erro) {
+      console.error("Erro ao enviar senha:", erro);
+    }
   };
+  
+
+
 
   return (
-    <form onSubmit={handleSubmit} className='container-seus-dados'>
+    <form onSubmit={handleSubmitDadosPessoais} className='container-seus-dados'>
       {callModalAlterar && <div className="fundo-overlay"></div>}
       <h5>Seus Dados</h5>
 
@@ -169,28 +218,28 @@ const SeusDados = () => {
             </div>
 
             <div className='modal-itens-buttons'>
-              <button type="button" onClick={handleAlterarEmail} className='default-1'>ALTERAR E-MAIL</button>
+              <button type="button" onClick={handleSubmitEmail} className='default-1'>ALTERAR E-MAIL</button>
               <button type="button" className='default-2' onClick={closeModalAlterar}>Cancelar</button>
             </div>
           </div>
         ) : (
           <div className='caixa-modal-alterar'>
-            <h6>Alterar Senha</h6>           
+            <h6>Alterar Senha</h6>
 
             <div className='modal-itens'>
-              <label htmlFor="nova-senha">Nova Senha</label>
-              <input type="password" name="novaSenha" value={formData.novaSenha} onChange={handleChange} required />
+              <label htmlFor="novaSenha">Nova Senha</label>
+              <input type="password" name="novaSenha" value={formData.novaSenha} onChange={handleChange} />
 
-              
+
             </div>
 
             <div className='modal-itens'>
               <label htmlFor="confirmar-nova-senha">Confirmar Nova Senha</label>
-              <input type="password" name="confirmarNovaSenha" value={formData.confirmarNovaSenha} onChange={handleChange} required />
+              <input type="password" name="confirmarNovaSenha" value={formData.confirmarNovaSenha} onChange={handleChange} />
             </div>
 
             <div className='modal-itens-buttons'>
-              <button type="button" onClick={handleAlterarSenha} className='default-1'>ALTERAR SENHA</button>
+              <button type="button" onClick={handleSubmitSenha} className='default-1'>ALTERAR SENHA</button>
               <button type="button" className='default-2' onClick={closeModalAlterar}>Cancelar</button>
             </div>
           </div>

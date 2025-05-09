@@ -21,12 +21,12 @@ export const buscarTabelas = async (rota, parametros = {}) => {
   }
 };
 
-export const enviarDados = async (rota, dados = {}, incluirCredenciais = false) => {
+export const enviarDados = async (rota, dados = {}, incluirCredenciais = false, metodo = "POST") => {
   try {
     const url = `http://localhost:3000/${rota}`;
 
     const res = await fetch(url, {
-      method: "POST",
+      method: metodo, 
       headers: {
         "Content-Type": "application/json",
       },
@@ -43,12 +43,10 @@ export const enviarDados = async (rota, dados = {}, incluirCredenciais = false) 
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error("Erro ao enviar dados:", err);
+    console.error(`Erro ao enviar dados via ${metodo}:`, err);
     throw err;
   }
 };
-
-
 
 
 // Função para dividir os itens
