@@ -7,7 +7,7 @@ import TrocasItem from './TrocasItem'
 const Trocas = () => {
   return (
     <div className='container-trocas'>
-      <h5>TRocas</h5>
+      <h5>Trocas</h5>
       <div className='container-trocas-itens'>
         <TrocasItem />
         <TrocasItem />

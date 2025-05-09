@@ -16,7 +16,7 @@ export const buscarTabelas = async (rota, parametros = {}) => {
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error("Erro ao buscar produtos:", err);
+    console.error("Erro ao buscar a tabela:", err);
     throw err;
   }
 };
@@ -61,3 +61,31 @@ export function processarItensInTheBox(listaInTheBox) {
     };
   });
 }
+
+// Função para mascarar email
+export function mascararEmail(email) {
+  if (!email) return "";
+  const [usuario, dominioCompleto] = email.split("@");
+  const dominioParts = dominioCompleto?.split(".");
+  const dominio = dominioParts?.[0] || "";
+  const extensao = dominioParts?.[1] || "";
+
+  const usuarioMasc = usuario[0] + "*".repeat(Math.max(usuario.length - 2, 1)) + usuario.slice(-1);
+  const dominioMasc = dominio[0] + "*".repeat(Math.max(dominio.length - 1, 1));
+
+  return `${usuarioMasc}@${dominioMasc}.${extensao}`;
+}
+
+// Função para mascarar CPF
+export function mascararCPF(cpf) {
+  if (!cpf) return "";
+  const numeros = cpf.replace(/\D/g, "");
+  if (numeros.length !== 11) return cpf;
+
+  return `${numeros.slice(0, 3)}.***.***-${numeros.slice(-2)}`;
+}
+
+
+
+
+

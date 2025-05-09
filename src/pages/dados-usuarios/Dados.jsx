@@ -9,7 +9,7 @@ import Pedidos from '../dados-usuarios/pedidos/Pedidos';
 import Trocas from '../dados-usuarios/trocas/Trocas';
 import Vales from '../dados-usuarios/vales/Vales';
 import SeusDados from '../dados-usuarios/seus-dados/SeusDados';
-import Enderecos from './Enderecos';
+import Enderecos from '../dados-usuarios/enderecos/Enderecos';
 
 const Dados = () => {
     const { setConta, componenteState } = useDados()

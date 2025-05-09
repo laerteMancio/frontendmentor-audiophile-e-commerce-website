@@ -24,7 +24,7 @@ import Yx1WirelessEarPhones from "../pages/detalhes-produtos/earphones/Yx1Wirele
 
 //Dados usuario
 import Dados from '../pages/dados-usuarios/Dados';
-import FormularioEndereco from '../pages/dados-usuarios/FormularioEndereco';
+import FormularioEndereco from '../pages/dados-usuarios/enderecos/FormularioEndereco';
 
 // Checkout
 import Login from './login/Login';

@@ -4,14 +4,15 @@
   justify-content: center;
   align-items: start;
 
-  width: 100%;
-}
+  width: 95%;
 
-.container-seus-dados button{
-  width: 90%;
   margin: 0 auto;
 }
 
+.container-seus-dados button {
+  width: 90%;
+  margin: 0 auto;
+}
 
 .container-seus-dados-itens {
   display: flex;
@@ -35,8 +36,108 @@
   width: 100%;
 }
 
-.seus-dados-itens input, select{
-  width: 90%;
+.seus-dados-itens input,
+select {
+  width: 100%;
 }
 
+.seus-dados-itens-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
+  width: 100%;
+
+  gap: 10px;
+}
+
+.container-modal-alterar {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 327px;
+  min-height: 488px;
+
+  padding: 30px;
+
+  gap: 50px;
+
+  background-color: var(--branco);
+  color: black;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+}
+
+.caixa-modal-alterar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 25px;
+  
+
+  
+}
+
+.caixa-modal-alterar h6{
+  margin-bottom: 10%;
+}
+
+.modal-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  width: 100%;
+}
+
+.input-email-atual{
+  background-color: var(--cinza-claro);
+  width: 100%;
+}
+.modal-itens input{
+  border: 1px solid var(--cinza-escuro);
+  
+  width: 100%;
+}
+
+.modal-itens-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 10px;
+
+  margin-top: 5%;
+}
+
+.container-modal-alterar.clicked {
+  display: flex;
+}
+
+.fundo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.5); /* ou var(--vinte) com opacity */
+
+  z-index: 5; /* abaixo do modal */
+}

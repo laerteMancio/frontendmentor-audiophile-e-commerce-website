@@ -1,0 +1,26 @@
+.container-usuario-enderecos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  
+    width: 100%;    
+}
+
+.container-usuario-enderecos button{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.lista-usuario-enderecos{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  
+    width: 100%;
+
+    gap: 20px;
+
+    margin-bottom: 10%;
+}

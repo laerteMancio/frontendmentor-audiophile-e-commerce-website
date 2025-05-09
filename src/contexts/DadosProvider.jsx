@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect, useReducer  } from "react";
+import { createContext, useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Criando o contexto
@@ -9,24 +9,24 @@ export const DadosProviderComponent = ({ children }) => {
 
   const initialState = { componenteAtivo: "Pedidos" };
 
-const componentesReducer = (state, action) => {
-  switch (action.type) {
-    case "MOSTRAR_PEDIDOS":
-      return { componenteAtivo: "Pedidos" };
-    case "MOSTRAR_TROCAS":
-      return { componenteAtivo: "Trocas" };
-    case "MOSTRAR_VALES":
-      return { componenteAtivo: "Vales" };
-    case "MOSTRAR_SEUS_DADOS":
-      return { componenteAtivo: "SeusDados" };
-    case "MOSTRAR_ENDERECOS":
-      return { componenteAtivo: "Enderecos" };
-    default:
-      return state;
-  }
-};
+  const componentesReducer = (state, action) => {
+    switch (action.type) {
+      case "MOSTRAR_PEDIDOS":
+        return { componenteAtivo: "Pedidos" };
+      case "MOSTRAR_TROCAS":
+        return { componenteAtivo: "Trocas" };
+      case "MOSTRAR_VALES":
+        return { componenteAtivo: "Vales" };
+      case "MOSTRAR_SEUS_DADOS":
+        return { componenteAtivo: "SeusDados" };
+      case "MOSTRAR_ENDERECOS":
+        return { componenteAtivo: "Enderecos" };
+      default:
+        return state;
+    }
+  };
 
-const [componenteState, componenteDispatch] = useReducer(componentesReducer, initialState);
+  const [componenteState, componenteDispatch] = useReducer(componentesReducer, initialState);
 
 
   const navigate = useNavigate();
@@ -34,8 +34,9 @@ const [componenteState, componenteDispatch] = useReducer(componentesReducer, ini
   const [cart, setCart] = useState([]);
   const [callCart, setCallCart] = useState(false);
   const [callCheckout, setCallCheckout] = useState(false);
-  const [callMenu, setCallMenu] = useState(false);  
+  const [callMenu, setCallMenu] = useState(false);
   const [callMenuLogado, setCallMenuLogado] = useState(false);
+  const [callModalAlterar, setModalAlterar] = useState(false);  
   const [conta, setConta] = useState(false)
 
   const [usuarioId, setUsuarioId] = useState(null)
@@ -47,8 +48,9 @@ const [componenteState, componenteDispatch] = useReducer(componentesReducer, ini
 
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
-  const menuRef = useRef(null);  
+  const menuRef = useRef(null);
   const menuLogadoRef = useRef(null);
+  const modalAlterarRef = useRef(null);
   const setaRef = useRef(null);
 
   const openCart = () => {
@@ -150,18 +152,18 @@ const [componenteState, componenteDispatch] = useReducer(componentesReducer, ini
       const res = await fetch("http://localhost:3000/usuarios/usuario-logado", {
         credentials: "include",
       });
-  
+
       if (!res.ok) {
         setUsuarioId(null);
         navigate("/login");
-        return; 
+        return;
       } else {
         openMenuLogado()
       }
-  
+
       const data = await res.json();
-      setUsuarioId({ id: data.id, nome: data.nome });      
-      
+      setUsuarioId({ id: data.id, nome: data.nome });
+
     } catch (err) {
       console.log("Erro ao verificar autenticação:", err);
       setUsuarioId(null);
@@ -169,8 +171,33 @@ const [componenteState, componenteDispatch] = useReducer(componentesReducer, ini
     }
   };
 
- 
-  
+  const openModalAlterar = () => {
+    setModalAlterar((prevState) => {
+      const newState = !prevState;
+
+      if (modalAlterarRef.current) {
+        if (newState) {
+          modalAlterarRef.current.classList.add('clicked');
+        } else {
+          modalAlterarRef.current.classList.remove('clicked');
+        }
+      }
+
+      return newState;
+    });
+  };
+
+
+  const closeModalAlterar = () => {
+    setModalAlterar(false);
+
+    if (modalAlterarRef.current) {
+      modalAlterarRef.current.classList.remove('clicked');
+    }
+  };
+
+
+
 
 
 
@@ -199,7 +226,12 @@ const [componenteState, componenteDispatch] = useReducer(componentesReducer, ini
         setConta,
         conta,
         componenteState,
-        componenteDispatch
+        componenteDispatch,
+        modalAlterarRef,
+        openModalAlterar,
+        callModalAlterar,
+        closeModalAlterar,
+        
       }}
     >
       {children}
