@@ -115,6 +115,7 @@ export const DadosProviderComponent = ({ children }) => {
       });
 
       setUsuarioId(null);
+      navigate("/")
     } catch (err) {
       console.error("Erro ao fazer logout:", err);
     }

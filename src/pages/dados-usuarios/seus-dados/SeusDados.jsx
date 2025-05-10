@@ -20,10 +20,13 @@ const SeusDados = () => {
     telefone: ""
   });
 
+
   const { openModalAlterar, modalAlterarRef, callModalAlterar, closeModalAlterar, usuarioId } = useDados()
 
   const [alternaModal, setAlternaModal] = useState("")
   const [dadosOriginais, setDadosOriginais] = useState({});
+  const [msgUsu, setMsgUsu] = useState("")
+  const [msgUsu2, setMsgUsu2] = useState("")
 
   useEffect(() => {
     const carregar = async () => {
@@ -47,10 +50,23 @@ const SeusDados = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const limparCamposEmailSenha = () => {
+    setFormData((prev) => ({
+      ...prev,
+      senhaAtual:"",
+      email: "",
+      novoEmail: "",
+      confirmarNovoEmail: "",
+      senha: "",
+      novaSenha: "",
+      confirmarNovaSenha: ""
+    }));
+  };
+
 
   const handleSubmitDadosPessoais = async (e) => {
     e.preventDefault();
-  
+
     // Filtra os dados pessoais, ignorando campos de email e senha
     const dadosPessoais = {
       nome: formData.nome,
@@ -59,7 +75,7 @@ const SeusDados = () => {
       sexo: formData.sexo,
       telefone: formData.telefone,
     };
-  
+
     // Compara os dados alterados com os dados originais (se houver)
     const dadosAlterados = {};
     Object.keys(dadosPessoais).forEach((chave) => {
@@ -67,84 +83,139 @@ const SeusDados = () => {
         dadosAlterados[chave] = dadosPessoais[chave];
       }
     });
-  
+
     // Verifica se há alguma alteração
     if (Object.keys(dadosAlterados).length === 0) {
-      console.log("Nenhuma alteração foi feita.");
+      setMsgUsu("Nenhuma alteração foi feita.");
+      setTimeout(() => {
+        setMsgUsu("")
+      }, 2000);
       return;
     }
-  
+
     try {
-      // Envia os dados alterados para a rota de dados pessoais
       await enviarDados(`usuarios/${usuarioId.id}/dados-pessoais`, dadosAlterados, false, "PATCH");
+      setMsgUsu("Dados alterados com sucesso")
     } catch (erro) {
       console.error("Erro ao enviar dados:", erro);
+      if (erro.response && erro.response.data && erro.response.data.mensagem) {
+        setMsgUsu(`Erro: ${erro.response.data.mensagem}`);
+        setTimeout(() => {
+          setMsgUsu("")
+        }, 2000);
+      } else {
+        setMsgUsu("Falha ao alterar os dados. Verifique sua conexão ou tente novamente mais tarde.");
+        setTimeout(() => {
+          setMsgUsu("")
+        }, 2000);
+      }
     }
   };
-  
+
 
 
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
-  
+
     const dadosAlterados = {};
-  
+
     // Verificar alteração no email
     if (formData.email && formData.email !== dadosOriginais.email) {
       dadosAlterados.email = formData.email;
     }
-  
+
     // Verificar alteração no novo email
     if (formData.novoEmail && formData.novoEmail !== dadosOriginais.email) {
       dadosAlterados.email = formData.novoEmail;
     }
-  
+
     // Se não houver alteração, não enviar dados
     if (Object.keys(dadosAlterados).length === 0) {
-      console.log("Nenhuma alteração no email.");
+      setMsgUsu2("Nenhuma alteração no email.");
+      setTimeout(() => {
+        setMsgUsu2("")
+      }, 2000);
       return;
     }
-  
+
     try {
       // Envia os dados alterados de email para a API
       await enviarDados(`usuarios/${usuarioId.id}/email`, dadosAlterados, false, "PATCH");
-
+      setMsgUsu2("Email atualizado com sucesso.");
+      setTimeout(() => {
+        setMsgUsu2("")
+      }, 2000);
     } catch (erro) {
-      console.error("Erro ao enviar email:", erro);
+      console.error("Erro ao enviar dados:", erro);
+      if (erro.response && erro.response.data && erro.response.data.mensagem) {
+        setMsgUsu2(`Erro: ${erro.response.data.mensagem}`);
+        setTimeout(() => {
+          setMsgUsu2("")
+        }, 2000);
+      } else {
+        setMsgUsu2("Falha ao alterar o email. Verifique sua conexão ou tente novamente mais tarde.");
+        setTimeout(() => {
+          setMsgUsu2("")
+        }, 2000);
+      }
     }
   };
-  
+
 
 
   const handleSubmitSenha = async (e) => {
     e.preventDefault();
-  
-    if (!formData.novaSenha || !formData.confirmarNovaSenha) {
-      console.log("Preencha todos os campos de senha.");
+
+    if (!formData.senhaAtual || !formData.novaSenha || !formData.confirmarNovaSenha) {
+      setMsgUsu2("Preencha todos os campos de senha.");
+      setTimeout(() => {
+        setMsgUsu2("")
+      }, 2000);
       return;
     }
-  
+
     if (formData.novaSenha !== formData.confirmarNovaSenha) {
-      console.log("As senhas não coincidem.");
+      setMsgUsu2("As senhas não coincidem.");
+      setTimeout(() => {
+        setMsgUsu2("")
+      }, 2000);
       return;
     }
-  
-    const dadosSenha = {      
+
+    const dadosSenha = {
+      senhaAtual: formData.senhaAtual,
       novaSenha: formData.novaSenha,
       confirmarNovaSenha: formData.confirmarNovaSenha,
     };
 
-    
-  
+
+
+
+
     try {
-      
       await enviarDados(`usuarios/${usuarioId.id}/senha`, dadosSenha, false, "PATCH");
-      console.log("Senha atualizada com sucesso.");
+
+      setMsgUsu2("Senha atualizada com sucesso.");
+      setTimeout(() => {
+        setMsgUsu2("");
+        limparCamposEmailSenha()
+      }, 2000);
     } catch (erro) {
-      console.error("Erro ao enviar senha:", erro);
+      console.error("Erro ao enviar dados:", erro);
+
+      if (erro.data && erro.data.mensagem) {
+        setMsgUsu2(` ${erro.data.mensagem}`);
+      } else {
+        setMsgUsu2("Falha ao alterar a senha. Verifique sua conexão ou tente novamente mais tarde.");
+      }
+
+      setTimeout(() => {
+        setMsgUsu2("");
+      }, 2000);
     }
+
   };
-  
+
 
 
 
@@ -196,6 +267,7 @@ const SeusDados = () => {
         </div>
       </div>
 
+      <span className='msg-usu'>{msgUsu}</span>
       <button className='default-1' type="submit">Salvar dados</button>
 
       <div ref={modalAlterarRef} className='container-modal-alterar'>
@@ -218,6 +290,7 @@ const SeusDados = () => {
             </div>
 
             <div className='modal-itens-buttons'>
+              <span className='msg-usu-2'>{msgUsu2}</span>
               <button type="button" onClick={handleSubmitEmail} className='default-1'>ALTERAR E-MAIL</button>
               <button type="button" className='default-2' onClick={closeModalAlterar}>Cancelar</button>
             </div>
@@ -227,10 +300,13 @@ const SeusDados = () => {
             <h6>Alterar Senha</h6>
 
             <div className='modal-itens'>
+              <label htmlFor="senha">Senha Atual</label>
+              <input type="password" name="senhaAtual" value={formData.senhaAtual} onChange={handleChange} />
+            </div>
+
+            <div className='modal-itens'>
               <label htmlFor="novaSenha">Nova Senha</label>
               <input type="password" name="novaSenha" value={formData.novaSenha} onChange={handleChange} />
-
-
             </div>
 
             <div className='modal-itens'>
@@ -239,6 +315,7 @@ const SeusDados = () => {
             </div>
 
             <div className='modal-itens-buttons'>
+              <span className='msg-usu-2'>{msgUsu2}</span>
               <button type="button" onClick={handleSubmitSenha} className='default-1'>ALTERAR SENHA</button>
               <button type="button" className='default-2' onClick={closeModalAlterar}>Cancelar</button>
             </div>

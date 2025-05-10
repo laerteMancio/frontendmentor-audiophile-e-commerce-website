@@ -24,28 +24,38 @@ export const buscarTabelas = async (rota, parametros = {}) => {
 export const enviarDados = async (rota, dados = {}, incluirCredenciais = false, metodo = "POST") => {
   try {
     const url = `http://localhost:3000/${rota}`;
-
+  
     const res = await fetch(url, {
-      method: metodo, 
+      method: metodo,
       headers: {
         "Content-Type": "application/json",
       },
       credentials: incluirCredenciais ? "include" : "same-origin",
       body: JSON.stringify(dados),
     });
-
+  
     const contentType = res.headers.get("content-type");
-
+  
     if (!contentType || !contentType.includes("application/json")) {
       throw new Error("Resposta não é JSON");
     }
-
+  
     const data = await res.json();
+  
+    if (!res.ok) {
+      // Lançar um erro com os dados da resposta
+      const erro = new Error(data.mensagem || "Erro na requisição");
+      erro.status = res.status;
+      erro.data = data;
+      throw erro;
+    }
+  
     return data;
   } catch (err) {
     console.error(`Erro ao enviar dados via ${metodo}:`, err);
     throw err;
   }
+  
 };
 
 

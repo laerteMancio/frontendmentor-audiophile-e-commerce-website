@@ -238,6 +238,38 @@ p {
   
 }
 
+.msg-usu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: var(--font-size-h6);
+
+  height: 48px;
+  
+  color: var(--preto);
+  
+  text-align: center;
+
+  margin: 0 auto;
+}
+
+.msg-usu-2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+
+  height: 48px;
+  
+  color: var(--preto);
+  
+  text-align: center;
+
+  margin: 0 auto;
+}
+
 *,
 *::before,
 *::after {
