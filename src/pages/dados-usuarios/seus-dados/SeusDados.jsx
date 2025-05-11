@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import "./SeusDados.css"
 
 import moment from "moment"
@@ -16,6 +16,7 @@ const SeusDados = () => {
     confirmarNovoEmail: "",
     senha: "",
     novaSenha: "",
+    senhaAtual: "",
     confirmarNovaSenha: "",
     telefone: ""
   });
@@ -28,22 +29,26 @@ const SeusDados = () => {
   const [msgUsu, setMsgUsu] = useState("")
   const [msgUsu2, setMsgUsu2] = useState("")
 
+
+
+  const carregar = useCallback(async () => {
+    const data = await buscarTabelas("usuarios/usuarios-id", { usuarioId: usuarioId.id });
+    if (data) {
+      setDadosOriginais(data[0]);
+      setFormData((prev) => ({
+        ...prev,
+        ...data[0]
+      }));
+    }
+
+  }, [usuarioId.id]);
+
   useEffect(() => {
-    const carregar = async () => {
-      const data = await buscarTabelas("usuarios/usuarios-id", { usuarioId: usuarioId.id });
-      if (data) {
-        setDadosOriginais(data[0]);
-        setFormData((prev) => ({
-          ...prev,
-          ...data[0]
-        }));
-      }
 
-    };
     carregar();
-  }, [usuarioId.id])
+  }, [carregar])
 
-  const dataFormatada = moment(formData.data_nasc).format("YYYY-MM-DD");
+  const dataFormatada = formData.data_nasc ? moment(formData.data_nasc).format("YYYY-MM-DD") : "";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +58,7 @@ const SeusDados = () => {
   const limparCamposEmailSenha = () => {
     setFormData((prev) => ({
       ...prev,
-      senhaAtual:"",
+      senhaAtual: "",
       email: "",
       novoEmail: "",
       confirmarNovoEmail: "",
@@ -62,6 +67,12 @@ const SeusDados = () => {
       confirmarNovaSenha: ""
     }));
   };
+
+  const exibirMensagem = (setFunc, msg) => {
+    setFunc(msg);
+    setTimeout(() => setFunc(""), 2000);
+  };
+
 
 
   const handleSubmitDadosPessoais = async (e) => {
@@ -86,99 +97,73 @@ const SeusDados = () => {
 
     // Verifica se há alguma alteração
     if (Object.keys(dadosAlterados).length === 0) {
-      setMsgUsu("Nenhuma alteração foi feita.");
-      setTimeout(() => {
-        setMsgUsu("")
-      }, 2000);
+      exibirMensagem(setMsgUsu, "Nenhuma alteração foi feita.");
       return;
     }
 
     try {
       await enviarDados(`usuarios/${usuarioId.id}/dados-pessoais`, dadosAlterados, false, "PATCH");
-      setMsgUsu("Dados alterados com sucesso")
+      exibirMensagem(setMsgUsu, "Dados alterados com sucesso.");
     } catch (erro) {
       console.error("Erro ao enviar dados:", erro);
       if (erro.response && erro.response.data && erro.response.data.mensagem) {
-        setMsgUsu(`Erro: ${erro.response.data.mensagem}`);
-        setTimeout(() => {
-          setMsgUsu("")
-        }, 2000);
+        exibirMensagem(setMsgUsu, `Erro: ${erro.response.data.mensagem}`);
       } else {
-        setMsgUsu("Falha ao alterar os dados. Verifique sua conexão ou tente novamente mais tarde.");
-        setTimeout(() => {
-          setMsgUsu("")
-        }, 2000);
+        exibirMensagem(setMsgUsu, "Falha ao alterar os dados. Verifique sua conexão ou tente novamente mais tarde.");
       }
     }
   };
-
-
 
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
 
     const dadosAlterados = {};
 
-    // Verificar alteração no email
-    if (formData.email && formData.email !== dadosOriginais.email) {
-      dadosAlterados.email = formData.email;
+    if (
+      formData.novoEmail &&
+      formData.confirmarNovoEmail &&
+      formData.novoEmail === formData.confirmarNovoEmail &&
+      formData.novoEmail !== dadosOriginais.email
+    ) {
+      dadosAlterados.email = formData.novoEmail;
+    } else {
+      exibirMensagem(setMsgUsu2, "Os e-mails não coincidem ou não foram alterados.");
+      return;
     }
 
-    // Verificar alteração no novo email
-    if (formData.novoEmail && formData.novoEmail !== dadosOriginais.email) {
-      dadosAlterados.email = formData.novoEmail;
-    }
 
     // Se não houver alteração, não enviar dados
     if (Object.keys(dadosAlterados).length === 0) {
-      setMsgUsu2("Nenhuma alteração no email.");
-      setTimeout(() => {
-        setMsgUsu2("")
-      }, 2000);
+      exibirMensagem(setMsgUsu2, "Nenhuma alteração no email.");
       return;
     }
 
     try {
       // Envia os dados alterados de email para a API
       await enviarDados(`usuarios/${usuarioId.id}/email`, dadosAlterados, false, "PATCH");
-      setMsgUsu2("Email atualizado com sucesso.");
-      setTimeout(() => {
-        setMsgUsu2("")
-      }, 2000);
+      exibirMensagem(setMsgUsu2, "Email atualizado com sucesso.");
+      limparCamposEmailSenha();
+      carregar();
     } catch (erro) {
       console.error("Erro ao enviar dados:", erro);
       if (erro.response && erro.response.data && erro.response.data.mensagem) {
-        setMsgUsu2(`Erro: ${erro.response.data.mensagem}`);
-        setTimeout(() => {
-          setMsgUsu2("")
-        }, 2000);
+        exibirMensagem(setMsgUsu2, `Erro: ${erro.response.data.mensagem}`);
       } else {
-        setMsgUsu2("Falha ao alterar o email. Verifique sua conexão ou tente novamente mais tarde.");
-        setTimeout(() => {
-          setMsgUsu2("")
-        }, 2000);
+        exibirMensagem(setMsgUsu2, "Falha ao alterar o email. Verifique sua conexão ou tente novamente mais tarde.");
       }
     }
   };
-
-
 
   const handleSubmitSenha = async (e) => {
     e.preventDefault();
 
     if (!formData.senhaAtual || !formData.novaSenha || !formData.confirmarNovaSenha) {
-      setMsgUsu2("Preencha todos os campos de senha.");
-      setTimeout(() => {
-        setMsgUsu2("")
-      }, 2000);
+      exibirMensagem(setMsgUsu2, "Preencha todos os campos de senha.")
       return;
     }
 
     if (formData.novaSenha !== formData.confirmarNovaSenha) {
-      setMsgUsu2("As senhas não coincidem.");
-      setTimeout(() => {
-        setMsgUsu2("")
-      }, 2000);
+      exibirMensagem(setMsgUsu2, "As senhas não coincidem.")
       return;
     }
 
@@ -188,30 +173,19 @@ const SeusDados = () => {
       confirmarNovaSenha: formData.confirmarNovaSenha,
     };
 
-
-
-
-
     try {
       await enviarDados(`usuarios/${usuarioId.id}/senha`, dadosSenha, false, "PATCH");
+      exibirMensagem(setMsgUsu2, "Senha atualizada com sucesso.")
+      limparCamposEmailSenha()
 
-      setMsgUsu2("Senha atualizada com sucesso.");
-      setTimeout(() => {
-        setMsgUsu2("");
-        limparCamposEmailSenha()
-      }, 2000);
     } catch (erro) {
       console.error("Erro ao enviar dados:", erro);
 
       if (erro.data && erro.data.mensagem) {
-        setMsgUsu2(` ${erro.data.mensagem}`);
+        exibirMensagem(setMsgUsu2, ` ${erro.data.mensagem}`)
       } else {
-        setMsgUsu2("Falha ao alterar a senha. Verifique sua conexão ou tente novamente mais tarde.");
+        exibirMensagem(setMsgUsu2, "Falha ao alterar a senha. Verifique sua conexão ou tente novamente mais tarde.")
       }
-
-      setTimeout(() => {
-        setMsgUsu2("");
-      }, 2000);
     }
 
   };
@@ -253,7 +227,7 @@ const SeusDados = () => {
 
         <div className='seus-dados-itens'>
           <label>Email:</label>
-          <input type="email" name="email" value={mascararEmail(formData.email)} readOnly />
+          <input className='input-email' type="email" name="input-email" value={mascararEmail(formData.email)} readOnly />
         </div>
 
         <div className='seus-dados-itens-buttons'>
@@ -280,19 +254,19 @@ const SeusDados = () => {
             </div>
 
             <div className='modal-itens'>
-              <label htmlFor="novo-email">Novo e-mail</label>
+              <label htmlFor="novoEmail">Novo e-mail</label>
               <input type="email" name="novoEmail" value={formData.novoEmail} onChange={handleChange} required />
             </div>
 
             <div className='modal-itens'>
-              <label htmlFor="confirmar-novo-email">Confirmar novo e-mail</label>
+              <label htmlFor="confirmarNovoEmail">Confirmar novo e-mail</label>
               <input type="email" name="confirmarNovoEmail" value={formData.confirmarNovoEmail} onChange={handleChange} required />
             </div>
 
             <div className='modal-itens-buttons'>
               <span className='msg-usu-2'>{msgUsu2}</span>
               <button type="button" onClick={handleSubmitEmail} className='default-1'>ALTERAR E-MAIL</button>
-              <button type="button" className='default-2' onClick={closeModalAlterar}>Cancelar</button>
+              <button type="button" className='default-2' onClick={closeModalAlterar}>Fechar</button>
             </div>
           </div>
         ) : (
@@ -300,18 +274,18 @@ const SeusDados = () => {
             <h6>Alterar Senha</h6>
 
             <div className='modal-itens'>
-              <label htmlFor="senha">Senha Atual</label>
-              <input type="password" name="senhaAtual" value={formData.senhaAtual} onChange={handleChange} />
+              <label htmlFor="senhaAtual">Senha Atual</label>
+              <input type="password" autoComplete='senha-atual' name="senhaAtual" value={formData.senhaAtual} onChange={handleChange} />
             </div>
 
             <div className='modal-itens'>
               <label htmlFor="novaSenha">Nova Senha</label>
-              <input type="password" name="novaSenha" value={formData.novaSenha} onChange={handleChange} />
+              <input type="password" autoComplete='nova-senha' name="novaSenha" value={formData.novaSenha} onChange={handleChange} />
             </div>
 
             <div className='modal-itens'>
-              <label htmlFor="confirmar-nova-senha">Confirmar Nova Senha</label>
-              <input type="password" name="confirmarNovaSenha" value={formData.confirmarNovaSenha} onChange={handleChange} />
+              <label htmlFor="confirmarNovaSenha">Confirmar Nova Senha</label>
+              <input type="password" autoComplete='confirmar-nova-senha' name="confirmarNovaSenha" value={formData.confirmarNovaSenha} onChange={handleChange} />
             </div>
 
             <div className='modal-itens-buttons'>
