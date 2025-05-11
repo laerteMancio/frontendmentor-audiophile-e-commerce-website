@@ -4,7 +4,7 @@ export const buscarTabelas = async (rota, parametros = {}) => {
     // Converte o objeto de parâmetros em query string
     const queryString = new URLSearchParams(parametros).toString();
     
-    const url = queryString ? `http://localhost:3000/${rota}?${queryString}` : `http://localhost:3000/${rota}`;
+    const url = queryString ? `https://backend-ecommerce-phones.vercel.app/${rota}?${queryString}` : `https://backend-ecommerce-phones.vercel.app/${rota}`;
     
     const res = await fetch(url);
     const contentType = res.headers.get("content-type");
@@ -23,7 +23,7 @@ export const buscarTabelas = async (rota, parametros = {}) => {
 
 export const enviarDados = async (rota, dados = {}, incluirCredenciais = false, metodo = "POST") => {
   try {
-    const url = `http://localhost:3000/${rota}`;
+    const url = `https://backend-ecommerce-phones.vercel.app/${rota}`;
   
     const res = await fetch(url, {
       method: metodo,

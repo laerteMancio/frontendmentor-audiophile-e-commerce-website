@@ -109,7 +109,7 @@ export const DadosProviderComponent = ({ children }) => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3000/usuarios/logout", {
+      await fetch("https://backend-ecommerce-phones.vercel.app/usuarios/logout", {
         method: "GET",
         credentials: "include",
       });
@@ -150,7 +150,7 @@ export const DadosProviderComponent = ({ children }) => {
 
   const verificarUsuarioLogado = async () => {
     try {
-      const res = await fetch("http://localhost:3000/usuarios/usuario-logado", {
+      const res = await fetch("https://backend-ecommerce-phones.vercel.app/usuarios/usuario-logado", {
         credentials: "include",
       });
 
