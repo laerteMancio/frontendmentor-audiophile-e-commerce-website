@@ -1,0 +1,24 @@
+.container-componente-endereco{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+  
+    width: 100%;
+
+    gap: 20px;
+
+    padding: 10px;
+
+    margin-bottom: 10%;
+
+    border: 1px solid var(--cinza-escuro);
+}
+
+.container-remover{
+    margin-left: auto;
+    padding-right: 10px;
+    font-size: 10px;
+
+    
+}

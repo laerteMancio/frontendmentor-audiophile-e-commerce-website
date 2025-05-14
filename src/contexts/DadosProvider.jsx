@@ -1,5 +1,6 @@
 import { createContext, useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import { buscarTabelas } from "../utils/funcoes";
 
 // Criando o contexto
 const DadosContext = createContext();
@@ -36,10 +37,32 @@ export const DadosProviderComponent = ({ children }) => {
   const [callCheckout, setCallCheckout] = useState(false);
   const [callMenu, setCallMenu] = useState(false);
   const [callMenuLogado, setCallMenuLogado] = useState(false);
-  const [callModalAlterar, setModalAlterar] = useState(false);  
-  const [conta, setConta] = useState(false)
+  const [callModalAlterar, setModalAlterar] = useState(false);
+  const [listaEnderecos, setListaEnderecos] = useState([])
+
+  const [conta, setConta] = useState(() => {
+    const contaSalva = localStorage.getItem("conta");
+    return contaSalva === "true";
+  });
 
   const [usuarioId, setUsuarioId] = useState(null)
+
+
+  useEffect(() => {
+    const usuarioSalvo = localStorage.getItem("usuarioLogado");
+    if (usuarioSalvo) {
+      setUsuarioId(JSON.parse(usuarioSalvo));
+    }
+  }, []);
+
+  useEffect(() => {
+    const contaSalva = localStorage.getItem("conta");
+    setConta(contaSalva === "true"); 
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("conta", conta ? "true" : "false");
+  }, [conta]);
 
   useEffect(() => {
     console.log(usuarioId);
@@ -52,6 +75,27 @@ export const DadosProviderComponent = ({ children }) => {
   const menuLogadoRef = useRef(null);
   const modalAlterarRef = useRef(null);
   const setaRef = useRef(null);
+
+  //const url = "https://backend-ecommerce-phones.vercel.app"
+  const url = "http://localhost:3001"
+
+
+  const carregarEnderecos = async (usuarioId) => {
+    const data = await buscarTabelas("enderecos/enderecos-id", { usuarioId });
+    if (data) {
+      setListaEnderecos(data);
+    }
+  };
+
+  useEffect(() => {
+    if (usuarioId?.id) {
+      carregarEnderecos(usuarioId.id);
+    }
+  }, [usuarioId?.id]);
+
+
+
+
 
   const openCart = () => {
 
@@ -108,13 +152,16 @@ export const DadosProviderComponent = ({ children }) => {
   }
 
   const handleLogout = async () => {
+
     try {
-      await fetch("https://backend-ecommerce-phones.vercel.app/usuarios/logout", {
+      await fetch(`${url}/usuarios/logout`, {
         method: "GET",
         credentials: "include",
       });
 
       setUsuarioId(null);
+      localStorage.removeItem("usuarioLogado");
+      setConta(false)
       navigate("/")
     } catch (err) {
       console.error("Erro ao fazer logout:", err);
@@ -149,28 +196,36 @@ export const DadosProviderComponent = ({ children }) => {
   };
 
   const verificarUsuarioLogado = async () => {
+
+
     try {
-      const res = await fetch("https://backend-ecommerce-phones.vercel.app/usuarios/usuario-logado", {
+      const res = await fetch(`${url}/usuarios/usuario-logado`, {
         credentials: "include",
       });
-
+      
       if (!res.ok) {
         setUsuarioId(null);
+        localStorage.removeItem("usuarioLogado");
         navigate("/login");
         return;
-      } else {
-        openMenuLogado()
       }
 
       const data = await res.json();
       setUsuarioId({ id: data.id, nome: data.nome });
+      const usuarioSalvo = localStorage.getItem("usuarioLogado");
+      if (usuarioSalvo) {
+        setUsuarioId(JSON.parse(usuarioSalvo));
+      }
 
+
+      openMenuLogado();
     } catch (err) {
       console.log("Erro ao verificar autenticação:", err);
       setUsuarioId(null);
       navigate("/login");
     }
   };
+
 
   const openModalAlterar = () => {
     setModalAlterar((prevState) => {
@@ -197,6 +252,10 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
+  const exibirMensagem = (setFunc, msg) => {
+    setFunc(msg);
+    setTimeout(() => setFunc(""), 2000);
+  };
 
 
 
@@ -205,6 +264,7 @@ export const DadosProviderComponent = ({ children }) => {
   return (
     <DadosContext.Provider
       value={{
+        url,
         cart,
         setCart,
         callCart,
@@ -232,7 +292,10 @@ export const DadosProviderComponent = ({ children }) => {
         openModalAlterar,
         callModalAlterar,
         closeModalAlterar,
-        
+        exibirMensagem,
+        carregarEnderecos,
+        listaEnderecos
+
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { User } from "lucide-react";
 
@@ -20,6 +20,8 @@ import { useDados } from "../hooks/useDados";
 
 const Header = () => {
   const local = useLocation()
+  const navigate = useNavigate()
+
   const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta, componenteDispatch } = useDados()
 
   return (
@@ -45,17 +47,15 @@ const Header = () => {
                 <Link to="/headphones">HEADPHONES</Link>
               </li>
               <li>
-                <Link to="/speakers">SPEAKERS</Link>                
+                <Link to="/speakers">SPEAKERS</Link>
               </li>
               <li>
-                <Link to="/earphones">EARPHONES</Link>                
+                <Link to="/earphones">EARPHONES</Link>
               </li>
               <li>
-                <Link to="/endereco">ENDEREÇO</Link>                
+                <Link to="/endereco">ENDEREÇO</Link>
               </li>
-              <li>
-                <a onClick={handleLogout} href="#">SAIR</a>
-              </li>
+
             </ul>
           </nav> :
 
@@ -77,7 +77,13 @@ const Header = () => {
               <li onClick={() => componenteDispatch({ type: "MOSTRAR_ENDERECOS" })}>Enderecos</li>
 
               <li>
-                <button onClick={handleLogout}>Sair</button>
+                <button onClick={() => {
+                  setConta(false);
+                  navigate("/");
+                }}>
+                  Sair
+                </button>
+
               </li>
             </ul>
           </nav>
@@ -93,14 +99,28 @@ const Header = () => {
 
                 <ul>
                   <li>
-                    <Link onClick={() => setConta(true)} to={"/dados-usuario"}> Meus dados</Link>
+                    <Link onClick={() => {
+                      setConta(true);
+                      localStorage.setItem("conta", "true");
+                    }} to="/dados-usuario">
+                      Meus dados
+                    </Link>
                   </li>
                   <li>
                     <a href="#">Minhas Compras</a>
                   </li>
                   <li>
-                    <a href="#">Sair</a>
+                    <Link
+                      to="/"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleLogout();
+                      }}
+                    >
+                      Sair
+                    </Link>
                   </li>
+
                 </ul>
               </nav>
             </div>

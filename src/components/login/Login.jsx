@@ -27,16 +27,19 @@ const Login = () => {
             senha,
         };
 
+
         try {
             const resposta = await enviarDados("usuarios/login", dados, true);            
             setUsuarioId({ id: resposta.usuario.id, nome: resposta.usuario.nome })
+            localStorage.setItem("usuarioLogado", JSON.stringify({ id: resposta.usuario.id, nome: resposta.usuario.nome }));
+
 
             setEmail('');
             setSenha('');
 
             navigate("/");
         } catch (erro) {
-            console.log("Erro no login");
+            console.log(erro, "Erro no login");
 
         }
     };

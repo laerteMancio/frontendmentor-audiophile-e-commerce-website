@@ -15,7 +15,16 @@ const Dados = () => {
     const { setConta, componenteState } = useDados()
     return (
         <div className='container-conta-usuario'>
-            <Link onClick={() => setConta(false)} to={"/"}>Voltar</Link>
+            <Link
+                to="/"
+                onClick={() => {
+                    setConta(false);
+                    localStorage.setItem("conta", "false")
+                }}
+            >
+                Voltar
+            </Link>
+
             <div className='conta-lista-componentes'>
                 {componenteState.componenteAtivo === "Pedidos" && <Pedidos />}
                 {componenteState.componenteAtivo === "Trocas" && <Trocas />}

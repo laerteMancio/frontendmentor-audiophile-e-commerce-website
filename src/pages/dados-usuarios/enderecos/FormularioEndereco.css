@@ -1,10 +1,11 @@
 .FormularioEndereco{
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
 
     width: 85%;
+    height: 100%;
     margin: 5%;
 
     gap: 10px;
@@ -13,9 +14,13 @@
 
 }
 
-.FormularioEndereco button{
-    margin-top: 5%;
+.FormularioEndereco h6{
+    
+    margin: 15% auto;
 }
+
+
+
 
 .itens-form{
     display: flex;
@@ -31,5 +36,26 @@
 .itens-form input{
     width: 100%;
     border-bottom: 1px solid gray;
+}
+
+.itens-form-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 50%;
+
+    gap: 10px;
+
+    
+}
+
+.itens-form-footer button {
+    width: 90%;
+}
+.itens-form-footer span{
+    height: 50px;
 }
 

@@ -1,11 +1,16 @@
+const urlBackend = "https://backend-ecommerce-phones.vercel.app"
+const urlLocal = "http://localhost:3001"
+
+
+
 export const buscarTabelas = async (rota, parametros = {}) => {
   try {
     
     // Converte o objeto de parâmetros em query string
     const queryString = new URLSearchParams(parametros).toString();
     
-    const url = queryString ? `https://backend-ecommerce-phones.vercel.app/${rota}?${queryString}` : `https://backend-ecommerce-phones.vercel.app/${rota}`;
-    
+    const url = queryString ? `${urlLocal}/${rota}?${queryString}` : `${urlLocal}/${rota}`;
+
     const res = await fetch(url);
     const contentType = res.headers.get("content-type");
 
@@ -23,8 +28,8 @@ export const buscarTabelas = async (rota, parametros = {}) => {
 
 export const enviarDados = async (rota, dados = {}, incluirCredenciais = false, metodo = "POST") => {
   try {
-    const url = `https://backend-ecommerce-phones.vercel.app/${rota}`;
-  
+    const url = `${urlLocal}/${rota}`;
+
     const res = await fetch(url, {
       method: metodo,
       headers: {
