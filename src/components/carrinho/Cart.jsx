@@ -48,10 +48,10 @@ const Cart = () => {
             </div>
 
             <div className='cart-bottom'>
-                <span onClick={closeCart} className="default-1">
+                <Link to="/" onClick={closeCart} className="default-1">
                     CONTINUAR COMPRANDO
-                </span>
-                <Link to="/checkout" onClick={closeCart} className="default-1">
+                </Link>                
+                <Link to="/finalizar-compra" onClick={closeCart} className="default-1">
                     FINALIZAR COMPRA
                 </Link>
             </div>

@@ -83,7 +83,6 @@ const Header = () => {
                 }}>
                   Sair
                 </button>
-
               </li>
             </ul>
           </nav>

@@ -1,0 +1,114 @@
+.container-finalizar-compra {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 95%;
+
+  gap: 20px;
+}
+
+.finalizar-containers-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  border: 1px solid var(--cinza-escuro);
+
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.finalizar-containers-itens h6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  margin-top: 10%;
+}
+
+.container-itens-principal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 100%;
+
+  margin-bottom: 10%;
+
+  gap: 15px;
+}
+
+.finalizar-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 10%;
+}
+
+.finalizar-link a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 90%;
+}
+
+.finalizar-lista-pix {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 80%;
+
+  margin: 0 auto;
+
+  gap: 10px;
+
+  list-style: decimal;
+}
+
+.finalizar-valor-total-itens {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.finalizar-containers-itens {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.finalizar-containers-itens .default {
+  font-size: 13px;
+  text-align: center;
+}
+
+.finalizar-containers-itens button {
+  width: 95%;
+}

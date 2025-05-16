@@ -25,10 +25,14 @@ import Yx1WirelessEarPhones from "../pages/detalhes-produtos/earphones/Yx1Wirele
 //Dados usuario
 import Dados from '../pages/dados-usuarios/Dados';
 import FormularioEndereco from '../pages/dados-usuarios/enderecos/FormularioEndereco';
+import ListaEnderecos from '../pages/dados-usuarios/enderecos/Enderecos';
 
-// Checkout
+//Login
 import Login from './login/Login';
 
+//Checkout
+import FinalizarCompra from '../pages/checkout/FinalizarCompra';
+import Endereco from './enderecos/Endereco';
 
 
 const Layout = () => {
@@ -53,6 +57,11 @@ const Layout = () => {
       {/* Dados usuario */}
       <Route path="/dados-usuario" element={<Dados />} />
       <Route path="/endereco" element={<FormularioEndereco />} />
+      <Route path="/ListaEnderecos" element={<ListaEnderecos />} />
+      
+
+       {/* rotas FinalizarCompra*/}
+       <Route path="/finalizar-compra" element={<FinalizarCompra />} />
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
     </Routes>

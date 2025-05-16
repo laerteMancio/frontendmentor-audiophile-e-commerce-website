@@ -32,13 +32,19 @@ export const DadosProviderComponent = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const cartSalvo = localStorage.getItem("cart");
+    return cartSalvo ? JSON.parse(cartSalvo) : [];
+  });
+
   const [callCart, setCallCart] = useState(false);
   const [callCheckout, setCallCheckout] = useState(false);
   const [callMenu, setCallMenu] = useState(false);
   const [callMenuLogado, setCallMenuLogado] = useState(false);
   const [callModalAlterar, setModalAlterar] = useState(false);
   const [listaEnderecos, setListaEnderecos] = useState([])
+  const [enderecoPrincipal, setEnderecoPrincipal] = useState();
+
 
   const [conta, setConta] = useState(() => {
     const contaSalva = localStorage.getItem("conta");
@@ -57,17 +63,12 @@ export const DadosProviderComponent = ({ children }) => {
 
   useEffect(() => {
     const contaSalva = localStorage.getItem("conta");
-    setConta(contaSalva === "true"); 
+    setConta(contaSalva === "true");
   }, []);
 
   useEffect(() => {
     localStorage.setItem("conta", conta ? "true" : "false");
   }, [conta]);
-
-  useEffect(() => {
-    console.log(usuarioId);
-  }, [usuarioId])
-
 
   // Usando useRef para referenciar o layout
   const layoutRef = useRef(null);
@@ -87,11 +88,24 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
+   const carregarEnderecoPrincipal = async (usuarioId) => {
+    const data = await buscarTabelas("enderecos/endereco-principal", { usuarioId });
+    if (data) {
+      setEnderecoPrincipal(data);
+    }
+  };
+
   useEffect(() => {
     if (usuarioId?.id) {
       carregarEnderecos(usuarioId.id);
     }
   }, [usuarioId?.id]);
+
+   useEffect(() => {
+    if (usuarioId?.id) {
+      carregarEnderecoPrincipal(usuarioId.id);
+    }
+  }, [usuarioId?.id, enderecoPrincipal]);
 
 
 
@@ -196,13 +210,11 @@ export const DadosProviderComponent = ({ children }) => {
   };
 
   const verificarUsuarioLogado = async () => {
-
-
     try {
       const res = await fetch(`${url}/usuarios/usuario-logado`, {
         credentials: "include",
       });
-      
+
       if (!res.ok) {
         setUsuarioId(null);
         localStorage.removeItem("usuarioLogado");
@@ -257,6 +269,18 @@ export const DadosProviderComponent = ({ children }) => {
     setTimeout(() => setFunc(""), 2000);
   };
 
+  // 1. Carrega o carrinho salvo (apenas uma vez ao iniciar)
+  useEffect(() => {
+    const cartSalvo = localStorage.getItem("cart");
+    if (cartSalvo) {
+      setCart(JSON.parse(cartSalvo));
+    }
+  }, []);
+
+  // 2. Atualiza o localStorage sempre que o carrinho muda
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
 
 
@@ -294,7 +318,8 @@ export const DadosProviderComponent = ({ children }) => {
         closeModalAlterar,
         exibirMensagem,
         carregarEnderecos,
-        listaEnderecos
+        listaEnderecos,
+        enderecoPrincipal
 
       }}
     >

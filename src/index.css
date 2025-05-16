@@ -128,6 +128,18 @@ p {
 }
 
 /* Subtitle */
+.title {
+  font-family: var(--font-family-manrope);
+  font-weight: bold;
+  font-size: var(--font-size-h6);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-subtitle);
+  line-height: var(--line-height-subtitle);
+
+  margin: 10% 0 10% 0 ;
+}
+
+/* Subtitle */
 .subtitle {
   font-family: var(--font-family-manrope);
   font-weight: bold;
