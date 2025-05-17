@@ -50,10 +50,11 @@ const Cart = () => {
             <div className='cart-bottom'>
                 <Link to="/" onClick={closeCart} className="default-1">
                     CONTINUAR COMPRANDO
-                </Link>                
-                <Link to="/finalizar-compra" onClick={closeCart} className="default-1">
-                    FINALIZAR COMPRA
                 </Link>
+                {cart.length > 0 ? <Link to="/finalizar-compra" onClick={closeCart} className="default-1">
+                    FINALIZAR COMPRA
+                </Link> : "" }                
+                
             </div>
         </div>
     );

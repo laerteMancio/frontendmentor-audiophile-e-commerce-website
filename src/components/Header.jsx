@@ -52,9 +52,7 @@ const Header = () => {
               <li>
                 <Link to="/earphones">EARPHONES</Link>
               </li>
-              <li>
-                <Link to="/endereco">ENDEREÇO</Link>
-              </li>
+              
 
             </ul>
           </nav> :
@@ -81,8 +79,7 @@ const Header = () => {
                 <button onClick={() => {
                   setConta(false);
                   localStorage.setItem("conta", "false");
-                  navigate("/");
-                  handleLogout();
+                  navigate("/");                  
                 }}>
                   Sair
                 </button>
@@ -119,7 +116,7 @@ const Header = () => {
                         handleLogout();
                       }}
                     >
-                      Sair
+                      Logout
                     </Link>
                   </li>
 

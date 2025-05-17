@@ -93,23 +93,35 @@ export const DadosProviderComponent = ({ children }) => {
 
 
 
-  const openCart = () => {
+  const openCart = async () => {
+  const usuarioSalvo = localStorage.getItem("usuarioLogado");
 
+  if (usuarioSalvo) {
+    setUsuarioId(JSON.parse(usuarioSalvo));
+    toggleCart();
+  } else {
+    const sucesso = await verificarUsuarioLogado();
+    if (sucesso) {
+      toggleCart();
+    }
+  }
+};
 
-    setCallCart((prevState) => {
-      const newState = !prevState;
+const toggleCart = () => {
+  setCallCart((prevState) => {
+    const newState = !prevState;
 
-      if (layoutRef.current) {
-        if (newState) {
-          layoutRef.current.classList.add('clicked');
-        } else {
-          layoutRef.current.classList.remove('clicked');
-        }
+    if (layoutRef.current) {
+      if (newState) {
+        layoutRef.current.classList.add('clicked');
+      } else {
+        layoutRef.current.classList.remove('clicked');
       }
+    }
 
-      return newState;
-    });
-  };
+    return newState;
+  });
+};
 
   const closeCart = () => {
     setCallCart(false);
