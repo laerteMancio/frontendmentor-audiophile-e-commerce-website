@@ -31,15 +31,14 @@ const Endereco = ({
     }
   };
 
-  const marcarComoPrincipal = async () => {
+  const marcarComoPrincipal = async () => {    
   try {
     const resposta = await enviarDados(
       `enderecos/principal/${id}`, // ID na rota
       {},                          // Sem body
       false,                       // Sem headers extras
       "PATCH"
-    );
-    console.log("Endereço marcado como principal:", resposta);
+    );    
     onSelecionarComoPrincipal(id); // Atualiza o componente pai
     carregarEnderecos(usuarioId.id);
   } catch (error) {
@@ -49,7 +48,7 @@ const Endereco = ({
 
 
   return (
-    <div className='container-componente-endereco'>          
+    <div className='container-componente-endereco'>    
       <div className='container-remover'>
         <button className='default' onClick={() => deletarEndereco(id)}>Remover</button>                
       </div>

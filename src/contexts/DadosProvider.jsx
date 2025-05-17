@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect, useReducer } from "react";
+import { createContext, useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { buscarTabelas } from "../utils/funcoes";
 
@@ -8,28 +8,7 @@ const DadosContext = createContext();
 // Provedor do contexto
 export const DadosProviderComponent = ({ children }) => {
 
-  const initialState = { componenteAtivo: "Pedidos" };
-
-  const componentesReducer = (state, action) => {
-    switch (action.type) {
-      case "MOSTRAR_PEDIDOS":
-        return { componenteAtivo: "Pedidos" };
-      case "MOSTRAR_TROCAS":
-        return { componenteAtivo: "Trocas" };
-      case "MOSTRAR_VALES":
-        return { componenteAtivo: "Vales" };
-      case "MOSTRAR_SEUS_DADOS":
-        return { componenteAtivo: "SeusDados" };
-      case "MOSTRAR_ENDERECOS":
-        return { componenteAtivo: "Enderecos" };
-      default:
-        return state;
-    }
-  };
-
-  const [componenteState, componenteDispatch] = useReducer(componentesReducer, initialState);
-
-
+ 
   const navigate = useNavigate();
 
   const [cart, setCart] = useState(() => {
@@ -44,6 +23,9 @@ export const DadosProviderComponent = ({ children }) => {
   const [callModalAlterar, setModalAlterar] = useState(false);
   const [listaEnderecos, setListaEnderecos] = useState([])
   const [enderecoPrincipal, setEnderecoPrincipal] = useState();
+
+  const [exibirVoltar, setExibirVoltar] = useState(true)
+
 
 
   const [conta, setConta] = useState(() => {
@@ -88,7 +70,7 @@ export const DadosProviderComponent = ({ children }) => {
     }
   };
 
-   const carregarEnderecoPrincipal = async (usuarioId) => {
+  const carregarEnderecoPrincipal = async (usuarioId) => {
     const data = await buscarTabelas("enderecos/endereco-principal", { usuarioId });
     if (data) {
       setEnderecoPrincipal(data);
@@ -101,7 +83,7 @@ export const DadosProviderComponent = ({ children }) => {
     }
   }, [usuarioId?.id]);
 
-   useEffect(() => {
+  useEffect(() => {
     if (usuarioId?.id) {
       carregarEnderecoPrincipal(usuarioId.id);
     }
@@ -269,20 +251,16 @@ export const DadosProviderComponent = ({ children }) => {
     setTimeout(() => setFunc(""), 2000);
   };
 
-  // 1. Carrega o carrinho salvo (apenas uma vez ao iniciar)
-  useEffect(() => {
+    useEffect(() => {
     const cartSalvo = localStorage.getItem("cart");
     if (cartSalvo) {
       setCart(JSON.parse(cartSalvo));
     }
   }, []);
 
-  // 2. Atualiza o localStorage sempre que o carrinho muda
-  useEffect(() => {
+    useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-
-
 
 
   return (
@@ -309,9 +287,7 @@ export const DadosProviderComponent = ({ children }) => {
         closeMenuLogado,
         setaRef,
         setConta,
-        conta,
-        componenteState,
-        componenteDispatch,
+        conta,  
         modalAlterarRef,
         openModalAlterar,
         callModalAlterar,
@@ -319,7 +295,9 @@ export const DadosProviderComponent = ({ children }) => {
         exibirMensagem,
         carregarEnderecos,
         listaEnderecos,
-        enderecoPrincipal
+        enderecoPrincipal,
+        exibirVoltar,
+        setExibirVoltar
 
       }}
     >

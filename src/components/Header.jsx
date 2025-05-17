@@ -22,7 +22,7 @@ const Header = () => {
   const local = useLocation()
   const navigate = useNavigate()
 
-  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta, componenteDispatch } = useDados()
+  const { openCart, menuRef, openMenu, closeMenu, handleLogout, menuLogadoRef, verificarUsuarioLogado, closeMenuLogado, setaRef, conta, setConta } = useDados()
 
   return (
     <header onClick={() => (closeMenu(), closeMenuLogado())}
@@ -61,25 +61,28 @@ const Header = () => {
 
           <nav ref={menuRef} className="menu-pagina">
             <ul>
+              <li>
+                <Link to="/pedidos">Pedidos</Link>
+              </li>
+              <li>
+                <Link to="/trocas">Trocas</Link></li>
+              <li>
+                <Link to="/vales">Vales</Link>
+              </li>
+              <li>
+                <Link to="/seus-dados">Seus Dados</Link>
+              </li>
+              <li>
+                <Link to="/ListaEnderecos">Endereços</Link>
+              </li>
 
-              <li onClick={() => componenteDispatch({ type: "MOSTRAR_PEDIDOS" })}>Pedidos</li>
-
-
-              <li onClick={() => componenteDispatch({ type: "MOSTRAR_TROCAS" })}>Trocas</li>
-
-
-              <li onClick={() => componenteDispatch({ type: "MOSTRAR_VALES" })}>Vales</li>
-
-
-              <li onClick={() => componenteDispatch({ type: "MOSTRAR_SEUS_DADOS" })}>Seus Dados</li>
-
-
-              <li onClick={() => componenteDispatch({ type: "MOSTRAR_ENDERECOS" })}>Enderecos</li>
 
               <li>
                 <button onClick={() => {
                   setConta(false);
+                  localStorage.setItem("conta", "false");
                   navigate("/");
+                  handleLogout();
                 }}>
                   Sair
                 </button>

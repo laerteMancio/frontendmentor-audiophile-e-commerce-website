@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import "./Enderecos.css";
 
@@ -10,12 +10,22 @@ import Enderecos from "../../../components/enderecos/Endereco";
 import { useDados } from "../../../hooks/useDados";
 
 const ListaEnderecos = () => {
-  const { listaEnderecos, carregarEnderecos, usuarioId } = useDados();
+  const { listaEnderecos, carregarEnderecos, usuarioId, exibirVoltar, setExibirVoltar } = useDados();
   const [enderecoPrincipalId, setEnderecoPrincipalId] = useState(null);
 
+  const navigate = useNavigate()
+
+  const handleVoltar = ()=>{
+    setExibirVoltar(false)
+    navigate("/finalizar-compra")
+  }
+
   useEffect(() => {
-    carregarEnderecos(usuarioId.id);
-  }, [carregarEnderecos, usuarioId.id]);
+    if (usuarioId && usuarioId.id) {
+      carregarEnderecos(usuarioId.id);
+    }
+  }, [carregarEnderecos, usuarioId]);
+
 
   // Atualiza estado com o endereço principal
   useEffect(() => {
@@ -27,6 +37,10 @@ const ListaEnderecos = () => {
 
   return (
     <div className='container-usuario-enderecos'>
+      {exibirVoltar ? <button onClick={handleVoltar} className='voltar-finalizar-compra'>
+        Finalizar compra
+      </button> : ""}
+
       <h5>Endereços</h5>
       <div className='lista-usuario-enderecos'>
         {listaEnderecos.length > 0 ? (

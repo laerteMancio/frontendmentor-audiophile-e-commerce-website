@@ -8,7 +8,7 @@ import { useDados } from "../../hooks/useDados"
 
 const FinalizarCompra = () => {
 
-  const { enderecoPrincipal } = useDados()
+  const { enderecoPrincipal, setExibirVoltar } = useDados()
 
   const [endereco, setEndereco] = useState('')
 
@@ -43,7 +43,7 @@ const FinalizarCompra = () => {
           <span>{'CEP: ' + endereco.cep + ' - ' + endereco.cidade + ' ' + endereco.estado}</span>
         </div>
         <div className='finalizar-link'>
-          <Link to={"/ListaEnderecos"} className='default-1'>Usar outro endereço</Link>
+          <Link to={"/ListaEnderecos"} onClick={()=> setExibirVoltar(true)} className='default-1'>Usar outro endereço</Link>
         </div>
       </div>
 
