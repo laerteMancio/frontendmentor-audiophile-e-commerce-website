@@ -112,3 +112,10 @@
 .finalizar-containers-itens button {
   width: 95%;
 }
+
+
+.frete-item {
+  display: block;
+  margin: 8px 0;
+  font-size: 14px;
+}

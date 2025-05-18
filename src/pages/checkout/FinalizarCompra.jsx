@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 
 import { useDados } from "../../hooks/useDados"
 
+import { enviarDados } from '../../utils/funcoes'
+
 const FinalizarCompra = () => {
 
   const { enderecoPrincipal, setExibirVoltar } = useDados()
@@ -16,20 +18,55 @@ const FinalizarCompra = () => {
     setEndereco(enderecoPrincipal ? enderecoPrincipal : '')
   }, [enderecoPrincipal])
 
-  
+
 
   const [freteSelecionado, setFreteSelecionado] = useState("");
   const [FpgSelecionada, setFpgSelecionada] = useState("");
 
+  const [opcoesFrete, setOpcoesFrete] = useState([]);
+  const [valorFrete, setValorFrete] = useState(0);
+  const [valorProdutos] = useState(100); // valor fixo de exemplo
+
+
+
+
   const handleChangeTipoEntrega = (event) => {
-    setFreteSelecionado(event.target.value);
-    console.log("Frete selecionado:", event.target.value);
+    const valor = event.target.value;
+    setFreteSelecionado(valor);
+
+    const freteEscolhido = opcoesFrete.find(f => f.servico === valor);
+    if (freteEscolhido) {
+      const precoNumerico = Number(freteEscolhido.preco.replace("R$", "").replace(",", ".").trim());
+      setValorFrete(precoNumerico);
+    }
   };
 
   const handleChangeFpg = (event) => {
     setFpgSelecionada(event.target.value);
     console.log("Frete selecionado:", event.target.value);
   };
+
+  const calcularFrete = async (cepDestino) => {
+    const dados = {
+      cepOrigem: "09973-180", // CEP fixo
+      cepDestino
+    };
+
+    try {
+      const resultado = await enviarDados("enderecos/calcularFrete", dados, false, "POST");
+      setOpcoesFrete(resultado);
+    } catch (erro) {
+      console.error("Erro ao calcular o frete:", erro);
+    }
+  };
+
+useEffect(() => {
+  if (endereco?.cep) {
+    calcularFrete(endereco.cep);
+  }
+}, [endereco.cep]);
+
+
 
 
   return (
@@ -39,11 +76,11 @@ const FinalizarCompra = () => {
       <div className='finalizar-containers-itens'>
         <h6 className='subtitle'>Endereço de entrega</h6>
         <div className='container-itens-principal'>
-          <span>{endereco.logradouro + ' ' +  ',' + ' ' + endereco.numero}</span>
+          <span>{endereco.logradouro + ' ' + ',' + ' ' + endereco.numero}</span>
           <span>{'CEP: ' + endereco.cep + ' - ' + endereco.cidade + ' ' + endereco.estado}</span>
         </div>
         <div className='finalizar-link'>
-          <Link to={"/ListaEnderecos"} onClick={()=> setExibirVoltar(true)} className='default-1'>Usar outro endereço</Link>
+          <Link to={"/ListaEnderecos"} onClick={() => setExibirVoltar(true)} className='default-1'>Usar outro endereço</Link>
         </div>
       </div>
 
@@ -52,28 +89,26 @@ const FinalizarCompra = () => {
       <div className='finalizar-containers-itens'>
         <h6 className='subtitle'>Selecione o tipo de entrega</h6>
         <div className="container-itens-principal">
-          <label>
-            <input
-              type="radio"
-              name="tipoFrete"
-              value="normal"
-              onChange={handleChangeTipoEntrega}
-            />
-            Normal
-          </label>
+          {opcoesFrete.length > 0 && (
+            <div className="fretes-opcoes">
+              {opcoesFrete.map((frete, index) => (
+                <label key={index} className="frete-item">
+                  <input
+                    type="radio"
+                    name="frete"
+                    value={frete.servico}
+                    onChange={handleChangeTipoEntrega}
+                    checked={freteSelecionado === frete.servico}
+                  />
+                  {frete.empresa} - {frete.servico} | {frete.preco} | {frete.prazoEntrega}
+                </label>
+              ))}
+            </div>
+          )}
 
-          <label>
-            <input
-              type="radio"
-              name="tipoFrete"
-              value="expressa"
-              onChange={handleChangeTipoEntrega}
-            />
-            Expressa
-          </label>
-
-          <p>Selecionado: {freteSelecionado}</p>
+          <p>Frete selecionado: {freteSelecionado || "Nenhum"}</p>
         </div>
+
 
       </div>
 
@@ -123,23 +158,15 @@ const FinalizarCompra = () => {
       </div>
 
       {/* Valor total */}
-      <div className='finalizar-containers-itens'>
-        <h6 className='subtitle'>Valor total</h6>
-        <div className='container-itens-principal'>
-          <div className='finalizar-valor-total-itens'>
-            <span>Valor dos produtos:</span>
-            <span>R$ 100,00</span>
-          </div>
-          <div className='finalizar-valor-total-itens'>
-            <span>Frete:</span>
-            <span>R$ 5,00</span>
-          </div>
-          <div className='finalizar-valor-total-itens'>
-            <span>Valor total:</span>
-            <span>R$ 105,00</span>
-          </div>
-        </div>
+      <div className='finalizar-valor-total-itens'>
+        <span>Frete:</span>
+        <span>{valorFrete > 0 ? `R$ ${valorFrete.toFixed(2)}` : "R$ 0,00"}</span>
       </div>
+      <div className='finalizar-valor-total-itens'>
+        <span>Valor total:</span>
+        <span>R$ {(valorProdutos + valorFrete).toFixed(2)}</span>
+      </div>
+
 
       {/* Buttons finalizar */}
       <div className='finalizar-containers-itens'>
