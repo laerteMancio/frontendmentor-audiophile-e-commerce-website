@@ -1,0 +1,38 @@
+.formulario-cartoes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+
+  width: 85%;
+  height: 100%;
+  margin: 5%;
+
+  gap: 10px;
+
+  font-size: var(--font-size-overline);
+}
+
+
+.itens-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+
+  width: 100%;
+
+  gap: 5px;
+}
+
+.itens-form input {
+  width: 100%;
+  border-bottom: 1px solid gray;
+}
+
+
+
+.formulario-cartoes button {
+  width: 90%;  
+  margin: 10% auto;
+}

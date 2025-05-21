@@ -8,8 +8,20 @@ const DadosContext = createContext();
 // Provedor do contexto
 export const DadosProviderComponent = ({ children }) => {
 
- 
+
   const navigate = useNavigate();
+
+  const [dadosFinalizarCompra, setDadosFinalizarCompra] = useState(() => {
+    const local = localStorage.getItem("dadosFinalizarCompra");
+    return local ? JSON.parse(local) : {};
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("dadosFinalizarCompra", JSON.stringify(dadosFinalizarCompra));
+    console.log(dadosFinalizarCompra);
+    
+  }, [dadosFinalizarCompra]);
 
   const [cart, setCart] = useState(() => {
     const cartSalvo = localStorage.getItem("cart");
@@ -90,38 +102,35 @@ export const DadosProviderComponent = ({ children }) => {
   }, [usuarioId?.id, enderecoPrincipal]);
 
 
-
-
-
   const openCart = async () => {
-  const usuarioSalvo = localStorage.getItem("usuarioLogado");
+    const usuarioSalvo = localStorage.getItem("usuarioLogado");
 
-  if (usuarioSalvo) {
-    setUsuarioId(JSON.parse(usuarioSalvo));
-    toggleCart();
-  } else {
-    const sucesso = await verificarUsuarioLogado();
-    if (sucesso) {
+    if (usuarioSalvo) {
+      setUsuarioId(JSON.parse(usuarioSalvo));
       toggleCart();
-    }
-  }
-};
-
-const toggleCart = () => {
-  setCallCart((prevState) => {
-    const newState = !prevState;
-
-    if (layoutRef.current) {
-      if (newState) {
-        layoutRef.current.classList.add('clicked');
-      } else {
-        layoutRef.current.classList.remove('clicked');
+    } else {
+      const sucesso = await verificarUsuarioLogado();
+      if (sucesso) {
+        toggleCart();
       }
     }
+  };
 
-    return newState;
-  });
-};
+  const toggleCart = () => {
+    setCallCart((prevState) => {
+      const newState = !prevState;
+
+      if (layoutRef.current) {
+        if (newState) {
+          layoutRef.current.classList.add('clicked');
+        } else {
+          layoutRef.current.classList.remove('clicked');
+        }
+      }
+
+      return newState;
+    });
+  };
 
   const closeCart = () => {
     setCallCart(false);
@@ -263,14 +272,14 @@ const toggleCart = () => {
     setTimeout(() => setFunc(""), 2000);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const cartSalvo = localStorage.getItem("cart");
     if (cartSalvo) {
       setCart(JSON.parse(cartSalvo));
     }
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
@@ -299,7 +308,7 @@ const toggleCart = () => {
         closeMenuLogado,
         setaRef,
         setConta,
-        conta,  
+        conta,
         modalAlterarRef,
         openModalAlterar,
         callModalAlterar,
@@ -309,7 +318,9 @@ const toggleCart = () => {
         listaEnderecos,
         enderecoPrincipal,
         exibirVoltar,
-        setExibirVoltar
+        setExibirVoltar,
+        dadosFinalizarCompra,
+        setDadosFinalizarCompra
 
       }}
     >

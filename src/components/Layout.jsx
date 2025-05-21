@@ -37,6 +37,7 @@ import Login from './login/Login';
 //Checkout
 import FinalizarCompra from '../pages/checkout/FinalizarCompra';
 import Endereco from './enderecos/Endereco';
+import CartaoCredito from '../pages/checkout/CartaoCredito';
 
 
 const Layout = () => {
@@ -71,6 +72,8 @@ const Layout = () => {
 
        {/* rotas FinalizarCompra*/}
        <Route path="/finalizar-compra" element={<FinalizarCompra />} />
+       <Route path="/cartao-credito" element={<CartaoCredito />} />
+
 
       <Route path="*" element={<PaginaNaoEncontrada />} />
     </Routes>
